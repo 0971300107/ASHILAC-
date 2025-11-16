@@ -1,0 +1,2432 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASHILAC - Association Socio-Culturelle de Bashila du Lac Moero</title>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Reset et styles de base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #1a472a;
+            --secondary-color: #2d5a3d;
+            --accent-color: #d4af37;
+            --accent-dark: #b8941f;
+            --light-color: #f8f9fa;
+            --dark-color: #212529;
+            --text-color: #333;
+            --text-light: #6c757d;
+            --border-radius: 12px;
+            --border-radius-sm: 8px;
+            --box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            --box-shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.15);
+            --transition: all 0.3s ease;
+            --gradient: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            overflow-x: hidden;
+            background-color: #fff;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section {
+            padding: 100px 0;
+        }
+
+        .bg-light {
+            background-color: #f8f9fa;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        /* Typographie */
+        h1, h2, h3, h4, h5, h6 {
+            margin-bottom: 1rem;
+            font-weight: 600;
+            line-height: 1.2;
+            font-family: 'Playfair Display', serif;
+        }
+
+        h1 {
+            font-size: 3rem;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+        }
+
+        h3 {
+            font-size: 1.75rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            position: relative;
+            margin-bottom: 1rem;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: var(--gradient);
+            margin: 1rem auto;
+            border-radius: 2px;
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+        }
+
+        .nav-logo a {
+            display: flex;
+            align-items: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .logo {
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--primary-color);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-color);
+            transition: var(--transition);
+        }
+
+        .nav-link:hover::after, .nav-link.active::after {
+            width: 100%;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-left: 2rem;
+        }
+
+        .btn-login {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .btn-login:hover {
+            color: var(--primary-color);
+        }
+
+        .btn-register {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 8px 16px;
+            border-radius: var(--border-radius-sm);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .btn-register:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .bar {
+            width: 25px;
+            height: 3px;
+            background-color: var(--text-color);
+            margin: 3px 0;
+            transition: var(--transition);
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            display: flex;
+            align-items: center;
+            min-height: 100vh;
+            padding: 100px 5% 80px;
+            color: white;
+            overflow: hidden;
+        }
+
+        .hero-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient);
+            z-index: -2;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: -1;
+        }
+
+        .hero-content {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            gap: 4rem;
+        }
+
+        .hero-text {
+            flex: 1;
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 400;
+            opacity: 0.9;
+        }
+
+        .hero-description {
+            font-size: 1.2rem;
+            margin-bottom: 2.5rem;
+            max-width: 600px;
+            opacity: 0.9;
+        }
+
+        .hero-image {
+            flex: 1;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-image img {
+            max-width: 100%;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow-lg);
+            transform: perspective(1000px) rotateY(-5deg);
+            transition: var(--transition);
+        }
+
+        .hero-image img:hover {
+            transform: perspective(1000px) rotateY(0);
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            color: white;
+            font-size: 0.9rem;
+            opacity: 0.8;
+            animation: bounce 2s infinite;
+        }
+
+        .scroll-line {
+            width: 1px;
+            height: 40px;
+            background-color: white;
+            margin: 0.5rem auto 0;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateX(-50%) translateY(0);
+            }
+            40% {
+                transform: translateX(-50%) translateY(-10px);
+            }
+            60% {
+                transform: translateX(-50%) translateY(-5px);
+            }
+        }
+
+        /* Boutons */
+        .btn-primary, .btn-secondary, .btn-outline {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 12px 24px;
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            cursor: pointer;
+            border: none;
+            text-align: center;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: var(--gradient);
+            color: white;
+            box-shadow: 0 4px 15px rgba(26, 71, 42, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(26, 71, 42, 0.4);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background-color: white;
+            color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--primary-color);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .btn-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(0, 0, 0, 0.05);
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn-icon:hover {
+            background-color: var(--primary-color);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Section Événements */
+        .events-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .event-card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .event-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--box-shadow-lg);
+        }
+
+        .event-image {
+            position: relative;
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .event-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .event-card:hover .event-image img {
+            transform: scale(1.1);
+        }
+
+        .event-date {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.8rem;
+            border-radius: var(--border-radius-sm);
+            min-width: 60px;
+        }
+
+        .event-date .day {
+            font-size: 1.5rem;
+            font-weight: 700;
+            line-height: 1;
+        }
+
+        .event-date .month {
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .event-info {
+            padding: 1.5rem;
+        }
+
+        .event-info h3 {
+            margin-bottom: 0.5rem;
+        }
+
+        .event-meta {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin: 1rem 0;
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        .event-meta span i {
+            margin-right: 0.5rem;
+            color: var(--primary-color);
+        }
+
+        .event-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1.5rem;
+        }
+
+        /* Section Communauté */
+        .community-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .community-card {
+            background-color: white;
+            padding: 2.5rem 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            text-align: center;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .community-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--gradient);
+        }
+
+        .community-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--box-shadow-lg);
+        }
+
+        .community-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--gradient);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2rem;
+        }
+
+        .community-card h3 {
+            margin-bottom: 1rem;
+        }
+
+        .community-stats {
+            display: flex;
+            justify-content: space-between;
+            margin: 1.5rem 0;
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        /* Section Galerie */
+        .gallery-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .gallery-filters {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 8px 16px;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 0.9rem;
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            background: var(--gradient);
+            color: white;
+            border-color: transparent;
+        }
+
+        .gallery-search {
+            display: flex;
+            align-items: center;
+            background-color: white;
+            border-radius: 30px;
+            padding: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .search-input {
+            border: none;
+            padding: 8px 15px;
+            border-radius: 30px;
+            outline: none;
+            width: 200px;
+        }
+
+        .search-btn {
+            background: var(--gradient);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .search-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            height: 250px;
+            box-shadow: var(--box-shadow);
+            cursor: pointer;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+            color: white;
+            padding: 1.5rem;
+            transform: translateY(100%);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            height: 100%;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            transform: translateY(0);
+        }
+
+        .gallery-info h3 {
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .gallery-info p {
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .gallery-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        /* Section Formation */
+        .formation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .formation-card {
+            background-color: white;
+            padding: 2.5rem 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            text-align: center;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .formation-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--gradient);
+        }
+
+        .formation-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--box-shadow-lg);
+        }
+
+        .formation-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--gradient);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2rem;
+        }
+
+        .formation-card h3 {
+            margin-bottom: 1rem;
+        }
+
+        .formation-card ul {
+            text-align: left;
+            margin: 1.5rem 0;
+            padding-left: 1.5rem;
+        }
+
+        .formation-card li {
+            margin-bottom: 0.5rem;
+            position: relative;
+        }
+
+        .formation-card li::before {
+            content: '•';
+            color: var(--primary-color);
+            font-weight: bold;
+            position: absolute;
+            left: -1rem;
+        }
+
+        .formation-meta {
+            display: flex;
+            justify-content: space-between;
+            margin: 1.5rem 0;
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        .challenge-section {
+            background-color: white;
+            padding: 2.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+        }
+
+        .challenge-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .challenge-info {
+            display: flex;
+            justify-content: center;
+        }
+
+        .challenge-current {
+            background-color: rgba(26, 71, 42, 0.05);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            text-align: center;
+            position: relative;
+            max-width: 500px;
+            width: 100%;
+        }
+
+        .challenge-badge {
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--gradient);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .challenge-current h4 {
+            margin-bottom: 0.5rem;
+        }
+
+        .challenge-progress {
+            margin: 1.5rem 0;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background-color: #e9ecef;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 0.5rem;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--gradient);
+            border-radius: 4px;
+            transition: width 1s ease;
+        }
+
+        /* Section Jeunesse */
+        .youth-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .youth-card {
+            background-color: white;
+            padding: 2.5rem 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            text-align: center;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .youth-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--gradient);
+        }
+
+        .youth-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--box-shadow-lg);
+        }
+
+        .youth-icon {
+            width: 70px;
+            height: 70px;
+            background: var(--gradient);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 1.8rem;
+        }
+
+        .youth-card h3 {
+            margin-bottom: 1rem;
+        }
+
+        .youth-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+            margin-top: 1rem;
+            transition: var(--transition);
+        }
+
+        .youth-link:hover {
+            gap: 1rem;
+        }
+
+        .youth-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .stat {
+            text-align: center;
+            padding: 2rem 1.5rem;
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+        }
+
+        .stat:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--box-shadow-lg);
+        }
+
+        .stat-number {
+            display: block;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: var(--text-light);
+            margin-top: 0.5rem;
+        }
+
+        /* Section Soutien */
+        .support-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .support-card {
+            background-color: white;
+            padding: 2.5rem 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            text-align: center;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .support-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--gradient);
+        }
+
+        .support-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--box-shadow-lg);
+        }
+
+        .support-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--gradient);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2rem;
+        }
+
+        .support-card h3 {
+            margin-bottom: 1rem;
+        }
+
+        .support-amounts, .support-areas {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .amount-btn {
+            padding: 8px 16px;
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: var(--border-radius-sm);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .amount-btn:hover {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        .support-areas span {
+            padding: 5px 10px;
+            background-color: rgba(26, 71, 42, 0.1);
+            color: var(--primary-color);
+            border-radius: 30px;
+            font-size: 0.9rem;
+        }
+
+        .support-stats {
+            display: flex;
+            justify-content: space-between;
+            margin: 1.5rem 0;
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .contact-card {
+            background-color: white;
+            padding: 2.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+        }
+
+        .contact-card h3 {
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .contact-details {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .contact-item i {
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            margin-top: 0.2rem;
+        }
+
+        .contact-item div {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .contact-item span {
+            font-weight: 500;
+        }
+
+        .contact-item small {
+            color: var(--text-light);
+            font-size: 0.8rem;
+        }
+
+        .responsible-card {
+            background-color: white;
+            padding: 2.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .responsible-image {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            overflow: hidden;
+            flex-shrink: 0;
+            background-color: #e9ecef;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-light);
+        }
+
+        .responsible-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .responsible-info h4 {
+            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+        }
+
+        .responsible-title {
+            color: var(--primary-color);
+            font-weight: 500;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .responsible-quote {
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .responsible-quote::before {
+            content: '"';
+            position: absolute;
+            left: 0;
+            top: -0.5rem;
+            font-size: 2rem;
+            color: var(--accent-color);
+        }
+
+        .responsible-contact {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 4rem 0 1rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-section h3 {
+            color: var(--accent-color);
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .footer-logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .footer-logo span {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .footer-section p {
+            margin-bottom: 1.5rem;
+            color: #adb5bd;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .footer-social a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            transition: var(--transition);
+        }
+
+        .footer-social a:hover {
+            background-color: var(--accent-color);
+            transform: translateY(-3px);
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-section ul li a {
+            color: #adb5bd;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-section ul li a:hover {
+            color: var(--accent-color);
+            padding-left: 5px;
+        }
+
+        .newsletter-form {
+            display: flex;
+            margin-top: 1rem;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            padding: 10px 15px;
+            border: none;
+            border-radius: var(--border-radius-sm) 0 0 var(--border-radius-sm);
+            outline: none;
+        }
+
+        .newsletter-form button {
+            background: var(--gradient);
+            color: white;
+            border: none;
+            padding: 0 15px;
+            border-radius: 0 var(--border-radius-sm) var(--border-radius-sm) 0;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .newsletter-form button:hover {
+            background: var(--primary-color);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #adb5bd;
+            font-size: 0.9rem;
+        }
+
+        .footer-bottom i {
+            color: #e74c3c;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 1100;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+            background-color: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.5rem;
+            color: white;
+            background-color: rgba(0, 0, 0, 0.5);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+            transition: var(--transition);
+        }
+
+        .close-modal:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .modal-image {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .modal-info {
+            padding: 1.5rem;
+            background-color: white;
+        }
+
+        .modal-title {
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-artist {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        /* Toast */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--primary-color);
+            color: white;
+            padding: 12px 20px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow-lg);
+            z-index: 1000;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .toast.active {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        /* Animations */
+        .section {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        
+        .section.animate-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .event-card, .community-card, .formation-card, .youth-card, .support-card, .gallery-item, .stat {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        
+        .animate-in .event-card, 
+        .animate-in .community-card, 
+        .animate-in .formation-card, 
+        .animate-in .youth-card, 
+        .animate-in .support-card,
+        .animate-in .gallery-item,
+        .animate-in .stat {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .animate-in .event-card:nth-child(1) { transition-delay: 0.1s; }
+        .animate-in .event-card:nth-child(2) { transition-delay: 0.2s; }
+        .animate-in .event-card:nth-child(3) { transition-delay: 0.3s; }
+        
+        .animate-in .community-card:nth-child(1) { transition-delay: 0.1s; }
+        .animate-in .community-card:nth-child(2) { transition-delay: 0.2s; }
+        .animate-in .community-card:nth-child(3) { transition-delay: 0.3s; }
+        
+        .animate-in .formation-card:nth-child(1) { transition-delay: 0.1s; }
+        .animate-in .formation-card:nth-child(2) { transition-delay: 0.2s; }
+        .animate-in .formation-card:nth-child(3) { transition-delay: 0.3s; }
+        
+        .animate-in .youth-card:nth-child(1) { transition-delay: 0.1s; }
+        .animate-in .youth-card:nth-child(2) { transition-delay: 0.2s; }
+        .animate-in .youth-card:nth-child(3) { transition-delay: 0.3s; }
+        
+        .animate-in .support-card:nth-child(1) { transition-delay: 0.1s; }
+        .animate-in .support-card:nth-child(2) { transition-delay: 0.2s; }
+        .animate-in .support-card:nth-child(3) { transition-delay: 0.3s; }
+        
+        .animate-in .gallery-item {
+            transition-delay: calc(0.1s * var(--i));
+        }
+        
+        .animate-in .stat:nth-child(1) { transition-delay: 0.1s; }
+        .animate-in .stat:nth-child(2) { transition-delay: 0.2s; }
+        .animate-in .stat:nth-child(3) { transition-delay: 0.3s; }
+        .animate-in .stat:nth-child(4) { transition-delay: 0.4s; }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .hero-title {
+                font-size: 3.5rem;
+            }
+            
+            .hero-content {
+                gap: 3rem;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                padding: 120px 5% 60px;
+            }
+            
+            .hero-content {
+                flex-direction: column;
+            }
+            
+            .hero-text {
+                margin-bottom: 2rem;
+            }
+            
+            .hero-buttons {
+                justify-content: center;
+            }
+            
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            h2 {
+                font-size: 2rem;
+            }
+            
+            .contact-info {
+                grid-template-columns: 1fr;
+            }
+            
+            .responsible-card {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                flex-direction: column;
+                background-color: white;
+                width: 100%;
+                text-align: center;
+                box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+                padding: 2rem 0;
+                transition: var(--transition);
+                gap: 1.5rem;
+            }
+            
+            .nav-menu.active {
+                left: 0;
+            }
+            
+            .nav-right {
+                margin-left: 0;
+                justify-content: center;
+            }
+            
+            .nav-toggle {
+                display: flex;
+            }
+            
+            .nav-toggle.active .bar:nth-child(2) {
+                opacity: 0;
+            }
+            
+            .nav-toggle.active .bar:nth-child(1) {
+                transform: translateY(8px) rotate(45deg);
+            }
+            
+            .nav-toggle.active .bar:nth-child(3) {
+                transform: translateY(-8px) rotate(-45deg);
+            }
+            
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.3rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .section {
+                padding: 80px 0;
+            }
+            
+            .gallery-controls {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .gallery-search {
+                width: 100%;
+            }
+            
+            .search-input {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .container {
+                width: 95%;
+            }
+            
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .event-card {
+                flex-direction: column;
+            }
+            
+            .gallery-filters {
+                gap: 0.5rem;
+            }
+            
+            .filter-btn {
+                padding: 6px 12px;
+                font-size: 0.9rem;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        // Données de l'application
+        const appData = {
+            events: [
+                {
+                    id: 1,
+                    title: "Festival de Musique Traditionnelle",
+                    description: "Un événement mettant en avant les musiciens locaux et leurs traditions.",
+                    date: { day: "15", month: "Oct" },
+                    location: "Centre Culturel ASHILAC",
+                    time: "18:00 - 22:00",
+                    image: "images/image2.jpg"
+                },
+                {
+                    id: 2,
+                    title: "Atelier de Poterie",
+                    description: "Apprenez les techniques ancestrales de la poterie avec nos artisans locaux.",
+                    date: { day: "22", month: "Oct" },
+                    location: "Atelier d'Art ASHILAC",
+                    time: "10:00 - 16:00",
+                    image: "images/image3.jpg"
+                },
+                {
+                    id: 3,
+                    title: "Exposition d'Art Contemporain",
+                    description: "Découvrez les œuvres des artistes émergents de la région du Lac Moero.",
+                    date: { day: "05", month: "Nov" },
+                    location: "Galerie ASHILAC",
+                    time: "09:00 - 17:00",
+                    image: "images/image4.jpg"
+                }
+            ],
+            galleryItems: [
+                {
+                    id: 1,
+                    title: "Harmonie du Lac",
+                    artist: "Jean Mutombo",
+                    category: "peinture",
+                    image: "images/image5.jpg"
+                },
+                {
+                    id: 2,
+                    title: "Esprit Ancestral",
+                    artist: "Marie Kabasele",
+                    category: "sculpture",
+                    image: "images/image6.jpg"
+                },
+                {
+                    id: 3,
+                    title: "Reflets du Soir",
+                    artist: "Paul Ilunga",
+                    category: "photo",
+                    image: "images/image7.jpg"
+                },
+                {
+                    id: 4,
+                    title: "Vannerie Traditionnelle",
+                    artist: "Annette Tshibanda",
+                    category: "artisanat",
+                    image: "images/image8.jpg"
+                },
+                {
+                    id: 5,
+                    title: "Danse des Couleurs",
+                    artist: "Samuel Ntumba",
+                    category: "peinture",
+                    image: "images/image9.jpg"
+                },
+                {
+                    id: 6,
+                    title: "Masque Cérémoniel",
+                    artist: "Joseph Kalala",
+                    category: "sculpture",
+                    image: "images/image10.jpg"
+                }
+            ],
+            communityStats: {
+                members: 245,
+                discussions: 1200,
+                online: 87,
+                polls: 12,
+                participation: 89
+            },
+            youthStats: {
+                youth: 150,
+                mentors: 25,
+                schools: 12,
+                contests: 8
+            }
+        };
+
+        // Composant principal de l'application
+        function App() {
+            const [activeSection, setActiveSection] = React.useState('accueil');
+            const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
+            const [galleryFilter, setGalleryFilter] = React.useState('all');
+            const [searchTerm, setSearchTerm] = React.useState('');
+            const [modalOpen, setModalOpen] = React.useState(false);
+            const [selectedImage, setSelectedImage] = React.useState(null);
+            const [toast, setToast] = React.useState({ show: false, message: '' });
+
+            // Gestion du scroll pour la navigation active
+            React.useEffect(() => {
+                const handleScroll = () => {
+                    const sections = document.querySelectorAll('section');
+                    const scrollPos = window.scrollY + 100;
+                    
+                    sections.forEach(section => {
+                        const sectionTop = section.offsetTop;
+                        const sectionHeight = section.offsetHeight;
+                        const sectionId = section.getAttribute('id');
+                        
+                        if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
+                            setActiveSection(sectionId);
+                        }
+                    });
+                };
+
+                window.addEventListener('scroll', handleScroll);
+                return () => window.removeEventListener('scroll', handleScroll);
+            }, []);
+
+            // Animation des statistiques
+            React.useEffect(() => {
+                const statsSection = document.querySelector('#jeunesse');
+                if (!statsSection) return;
+
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            // Animation des statistiques
+                            const stats = document.querySelectorAll('.stat-number');
+                            stats.forEach(stat => {
+                                const target = parseInt(stat.textContent);
+                                let current = 0;
+                                const increment = target / 50;
+                                
+                                const timer = setInterval(() => {
+                                    current += increment;
+                                    if (current >= target) {
+                                        current = target;
+                                        clearInterval(timer);
+                                    }
+                                    stat.textContent = Math.floor(current) + (stat.textContent.includes('+') ? '+' : '');
+                                }, 30);
+                            });
+                            
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.5 });
+
+                observer.observe(statsSection);
+            }, []);
+
+            // Fonction pour afficher les notifications toast
+            const showToast = (message) => {
+                setToast({ show: true, message });
+                setTimeout(() => {
+                    setToast({ show: false, message: '' });
+                }, 3000);
+            };
+
+            // Filtrer les éléments de la galerie
+            const filteredGalleryItems = appData.galleryItems.filter(item => {
+                const matchesCategory = galleryFilter === 'all' || item.category === galleryFilter;
+                const matchesSearch = searchTerm === '' || 
+                    item.title.toLowerCase().includes(searchTerm.toLowerCase()) || 
+                    item.artist.toLowerCase().includes(searchTerm.toLowerCase());
+                
+                return matchesCategory && matchesSearch;
+            });
+
+            // Ouvrir le modal d'image
+            const openImageModal = (item) => {
+                setSelectedImage(item);
+                setModalOpen(true);
+            };
+
+            // Fermer le modal
+            const closeModal = () => {
+                setModalOpen(false);
+                setSelectedImage(null);
+            };
+
+            // Gestion de l'ajout au calendrier
+            const handleAddToCalendar = (eventTitle) => {
+                showToast(`"${eventTitle}" a été ajouté à votre calendrier!`);
+            };
+
+            return (
+                <div className="App">
+                    {/* Navigation */}
+                    <Navbar 
+                        activeSection={activeSection} 
+                        mobileMenuOpen={mobileMenuOpen}
+                        setMobileMenuOpen={setMobileMenuOpen}
+                    />
+                    
+                    {/* Sections principales */}
+                    <HeroSection />
+                    
+                    <EventsSection 
+                        events={appData.events}
+                        onAddToCalendar={handleAddToCalendar}
+                    />
+                    
+                    <CommunitySection communityStats={appData.communityStats} />
+                    
+                    <GallerySection 
+                        galleryItems={filteredGalleryItems}
+                        galleryFilter={galleryFilter}
+                        setGalleryFilter={setGalleryFilter}
+                        searchTerm={searchTerm}
+                        setSearchTerm={setSearchTerm}
+                        onImageClick={openImageModal}
+                    />
+                    
+                    <FormationSection />
+                    
+                    <YouthSection youthStats={appData.youthStats} />
+                    
+                    <SupportSection />
+                    
+                    <Footer />
+                    
+                    {/* Modal d'image */}
+                    <ImageModal 
+                        isOpen={modalOpen}
+                        image={selectedImage}
+                        onClose={closeModal}
+                    />
+                    
+                    {/* Notification Toast */}
+                    <Toast 
+                        show={toast.show}
+                        message={toast.message}
+                    />
+                </div>
+            );
+        }
+
+        // Composant Navigation
+        function Navbar({ activeSection, mobileMenuOpen, setMobileMenuOpen }) {
+            const toggleMobileMenu = () => {
+                setMobileMenuOpen(!mobileMenuOpen);
+            };
+
+            return (
+                <nav className="navbar">
+                    <div className="nav-container">
+                        <div className="nav-logo">
+                            <a href="#accueil">
+                                <img src="images/logo_ashilac_1.png" alt="Logo ASHILAC" className="logo" />
+                                <span>ASHILAC</span>
+                            </a>
+                        </div>
+                        <div className={`nav-menu ${mobileMenuOpen ? 'active' : ''}`} id="nav-menu">
+                            <a href="#accueil" className={`nav-link ${activeSection === 'accueil' ? 'active' : ''}`}>Accueil</a>
+                            <a href="#evenements" className={`nav-link ${activeSection === 'evenements' ? 'active' : ''}`}>Événements</a>
+                            <a href="#communaute" className={`nav-link ${activeSection === 'communaute' ? 'active' : ''}`}>Communauté</a>
+                            <a href="#galerie" className={`nav-link ${activeSection === 'galerie' ? 'active' : ''}`}>Galerie</a>
+                            <a href="#formation" className={`nav-link ${activeSection === 'formation' ? 'active' : ''}`}>Formation</a>
+                            <a href="#jeunesse" className={`nav-link ${activeSection === 'jeunesse' ? 'active' : ''}`}>Jeunesse</a>
+                            <a href="#soutien" className={`nav-link ${activeSection === 'soutien' ? 'active' : ''}`}>Soutien</a>
+                            <div className="nav-right">
+                                <a href="#" className="btn-login"><i className="fas fa-user"></i> Connexion</a>
+                                <a href="#" className="btn-register">S'inscrire</a>
+                            </div>
+                        </div>
+                        <div className={`nav-toggle ${mobileMenuOpen ? 'active' : ''}`} id="nav-toggle" onClick={toggleMobileMenu}>
+                            <span className="bar"></span>
+                            <span className="bar"></span>
+                            <span className="bar"></span>
+                        </div>
+                    </div>
+                </nav>
+            );
+        }
+
+        // Composant Hero Section
+        function HeroSection() {
+            return (
+                <section id="accueil" className="hero">
+                    <div className="hero-background">
+                        <div className="hero-overlay"></div>
+                    </div>
+                    <div className="hero-content">
+                        <div className="hero-text">
+                            <h1 className="hero-title">ASHILAC</h1>
+                            <h2 className="hero-subtitle">Association Socio-Culturelle de Bashila du Lac Moero</h2>
+                            <p className="hero-description">Valoriser la culture locale, connecter la communauté et engager les jeunes autour des arts et traditions du Lac Moero.</p>
+                            <div className="hero-buttons">
+                                <a href="#evenements" className="btn-primary">Découvrir nos événements</a>
+                                <a href="#communaute" className="btn-secondary">Rejoindre la communauté</a>
+                            </div>
+                        </div>
+                        <div className="hero-image">
+                            <img src="images/image1.jpg" alt="Culture du Lac Moero" />
+                        </div>
+                    </div>
+                    <div className="scroll-indicator">
+                        <span>Scroll</span>
+                        <div className="scroll-line"></div>
+                    </div>
+                </section>
+            );
+        }
+
+        // Composant Section Événements
+        function EventsSection({ events, onAddToCalendar }) {
+            return (
+                <section id="evenements" className="section">
+                    <div className="container">
+                        <div className="section-header">
+                            <h2 className="section-title">Événements & Culture</h2>
+                            <p className="section-subtitle">Découvrez notre programmation culturelle riche et variée</p>
+                        </div>
+                        <div className="events-grid">
+                            {events.map(event => (
+                                <EventCard 
+                                    key={event.id}
+                                    event={event}
+                                    onAddToCalendar={onAddToCalendar}
+                                />
+                            ))}
+                        </div>
+                        <div className="text-center">
+                            <a href="#" className="btn-primary">Voir tous les événements <i className="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </section>
+            );
+        }
+
+        // Composant Carte d'événement
+        function EventCard({ event, onAddToCalendar }) {
+            return (
+                <div className="event-card">
+                    <div className="event-image">
+                        <img src={event.image} alt={event.title} />
+                        <div className="event-date">
+                            <span className="day">{event.date.day}</span>
+                            <span className="month">{event.date.month}</span>
+                        </div>
+                    </div>
+                    <div className="event-info">
+                        <h3>{event.title}</h3>
+                        <p>{event.description}</p>
+                        <div className="event-meta">
+                            <span><i className="fas fa-map-marker-alt"></i> {event.location}</span>
+                            <span><i className="fas fa-clock"></i> {event.time}</span>
+                        </div>
+                        <div className="event-actions">
+                            <button 
+                                className="btn-outline calendar-btn"
+                                onClick={() => onAddToCalendar(event.title)}
+                            >
+                                Ajouter à mon calendrier
+                            </button>
+                            <button className="btn-icon"><i className="fas fa-share-alt"></i></button>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        // Composant Section Communauté
+        function CommunitySection({ communityStats }) {
+            return (
+                <section id="communaute" className="section bg-light">
+                    <div className="container">
+                        <div className="section-header">
+                            <h2 className="section-title">Communauté & Échanges</h2>
+                            <p className="section-subtitle">Rejoignez notre communauté dynamique et participez aux échanges</p>
+                        </div>
+                        <div className="community-grid">
+                            <div className="community-card">
+                                <div className="community-icon">
+                                    <i className="fas fa-comments"></i>
+                                </div>
+                                <h3>Forum de Discussion</h3>
+                                <p>Participez aux conversations thématiques sur la culture, l'art et les initiatives locales.</p>
+                                <div className="community-stats">
+                                    <span><i className="fas fa-users"></i> {communityStats.members} membres actifs</span>
+                                    <span><i className="fas fa-comment"></i> {communityStats.discussions} discussions</span>
+                                </div>
+                                <a href="#" className="btn-outline">Accéder au forum</a>
+                            </div>
+                            
+                            <div className="community-card">
+                                <div className="community-icon">
+                                    <i className="fas fa-users"></i>
+                                </div>
+                                <h3>Chat en Temps Réel</h3>
+                                <p>Échangez en direct avec d'autres membres de la communauté ASHILAC.</p>
+                                <div className="community-stats">
+                                    <span><i className="fas fa-user-clock"></i> {communityStats.online} en ligne</span>
+                                    <span><i className="fas fa-comment-dots"></i> Chat actif</span>
+                                </div>
+                                <a href="#" className="btn-outline">Rejoindre le chat</a>
+                            </div>
+                            
+                            <div className="community-card">
+                                <div className="community-icon">
+                                    <i className="fas fa-chart-pie"></i>
+                                </div>
+                                <h3>Sondages Communautaires</h3>
+                                <p>Donnez votre avis sur les projets et événements futurs d'ASHILAC.</p>
+                                <div className="community-stats">
+                                    <span><i className="fas fa-poll"></i> {communityStats.polls} sondages actifs</span>
+                                    <span><i className="fas fa-vote-yea"></i> {communityStats.participation}% participation</span>
+                                </div>
+                                <a href="#" className="btn-outline">Participer aux sondages</a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            );
+        }
+
+        // Composant Section Galerie
+        function GallerySection({ 
+            galleryItems, 
+            galleryFilter, 
+            setGalleryFilter, 
+            searchTerm, 
+            setSearchTerm,
+            onImageClick 
+        }) {
+            const filters = [
+                { key: 'all', label: 'Tous' },
+                { key: 'peinture', label: 'Peinture' },
+                { key: 'sculpture', label: 'Sculpture' },
+                { key: 'photo', label: 'Photographie' },
+                { key: 'artisanat', label: 'Artisanat' }
+            ];
+
+            return (
+                <section id="galerie" className="section">
+                    <div className="container">
+                        <div className="section-header">
+                            <h2 className="section-title">Galerie d'Art Virtuelle</h2>
+                            <p className="section-subtitle">Découvrez les talents artistiques de notre communauté</p>
+                        </div>
+                        <div className="gallery-controls">
+                            <div className="gallery-filters">
+                                {filters.map(filter => (
+                                    <button 
+                                        key={filter.key}
+                                        className={`filter-btn ${galleryFilter === filter.key ? 'active' : ''}`}
+                                        onClick={() => setGalleryFilter(filter.key)}
+                                    >
+                                        {filter.label}
+                                    </button>
+                                ))}
+                            </div>
+                            <div className="gallery-search">
+                                <input 
+                                    type="text" 
+                                    placeholder="Rechercher une œuvre..." 
+                                    className="search-input"
+                                    value={searchTerm}
+                                    onChange={(e) => setSearchTerm(e.target.value)}
+                                />
+                                <button className="search-btn"><i className="fas fa-search"></i></button>
+                            </div>
+                        </div>
+                        <div className="gallery-grid">
+                            {galleryItems.map((item, index) => (
+                                <GalleryItem 
+                                    key={item.id}
+                                    item={item}
+                                    index={index}
+                                    onClick={() => onImageClick(item)}
+                                />
+                            ))}
+                        </div>
+                        <div className="text-center">
+                            <a href="#" className="btn-primary">Voir toute la galerie <i className="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </section>
+            );
+        }
+
+        // Composant Item de Galerie
+        function GalleryItem({ item, index, onClick }) {
+            return (
+                <div 
+                    className="gallery-item" 
+                    data-category={item.category}
+                    style={{ '--i': index }}
+                    onClick={onClick}
+                >
+                    <img src={item.image} alt={item.title} />
+                    <div className="gallery-overlay">
+                        <div className="gallery-info">
+                            <h3>{item.title}</h3>
+                            <p>Artiste: {item.artist}</p>
+                            <div className="gallery-actions">
+                                <button className="btn-icon"><i className="far fa-heart"></i></button>
+                                <button className="btn-icon"><i className="fas fa-expand"></i></button>
+                                <button className="btn-icon"><i className="fas fa-share-alt"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        // Composant Section Formation
+        function FormationSection() {
+            return (
+                <section id="formation" className="section bg-light">
+                    <div className="container">
+                        <div className="section-header">
+                            <h2 className="section-title">Création & Formation</h2>
+                            <p className="section-subtitle">Développez vos talents avec nos programmes de formation</p>
+                        </div>
+                        <div className="formation-grid">
+                            <div className="formation-card">
+                                <div className="formation-icon">
+                                    <i className="fas fa-music"></i>
+                                </div>
+                                <h3>Ateliers Musicaux</h3>
+                                <p>Apprenez à créer de la musique avec des instruments traditionnels et modernes.</p>
+                                <ul>
+                                    <li>Instruments traditionnels</li>
+                                    <li>Production musicale</li>
+                                    <li>Composition</li>
+                                </ul>
+                                <div className="formation-meta">
+                                    <span><i className="fas fa-clock"></i> 12 semaines</span>
+                                    <span><i className="fas fa-user-graduate"></i> Niveau débutant</span>
+                                </div>
+                                <a href="#" className="btn-outline">En savoir plus</a>
+                            </div>
+                            
+                            <div className="formation-card">
+                                <div className="formation-icon">
+                                    <i className="fas fa-paint-brush"></i>
+                                </div>
+                                <h3>Arts Visuels</h3>
+                                <p>Développez vos compétences en peinture, dessin et arts numériques.</p>
+                                <ul>
+                                    <li>Techniques de dessin</li>
+                                    <li>Peinture traditionnelle</li>
+                                    <li>Art numérique</li>
+                                </ul>
+                                <div className="formation-meta">
+                                    <span><i className="fas fa-clock"></i> 8 semaines</span>
+                                    <span><i className="fas fa-user-graduate"></i> Tous niveaux</span>
+                                </div>
+                                <a href="#" className="btn-outline">En savoir plus</a>
+                            </div>
+                            
+                            <div className="formation-card">
+                                <div className="formation-icon">
+                                    <i className="fas fa-video"></i>
+                                </div>
+                                <h3>Production Vidéo</h3>
+                                <p>Maîtrisez les techniques de réalisation et montage vidéo.</p>
+                                <ul>
+                                    <li>Réalisation</li>
+                                    <li>Montage vidéo</li>
+                                    <li>Post-production</li>
+                                </ul>
+                                <div className="formation-meta">
+                                    <span><i className="fas fa-clock"></i> 10 semaines</span>
+                                    <span><i className="fas fa-user-graduate"></i> Niveau intermédiaire</span>
+                                </div>
+                                <a href="#" className="btn-outline">En savoir plus</a>
+                            </div>
+                        </div>
+                        
+                        <div className="challenge-section">
+                            <div className="challenge-header">
+                                <h3>Challenges Créatifs Mensuels</h3>
+                                <p>Participez à nos challenges créatifs et faites voter la communauté pour vos œuvres !</p>
+                            </div>
+                            <div className="challenge-info">
+                                <div className="challenge-current">
+                                    <div className="challenge-badge">En cours</div>
+                                    <h4>Challenge du mois : "Le Lac dans tous ses états"</h4>
+                                    <p>Date limite : 30 octobre 2023</p>
+                                    <div className="challenge-progress">
+                                        <div className="progress-bar">
+                                            <div className="progress-fill" style={{width: '65%'}}></div>
+                                        </div>
+                                        <span>65% des œuvres reçues</span>
+                                    </div>
+                                    <a href="#" className="btn-primary">Participer</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            );
+        }
+
+        // Composant Section Jeunesse
+        function YouthSection({ youthStats }) {
+            return (
+                <section id="jeunesse" className="section">
+                    <div className="container">
+                        <div className="section-header">
+                            <h2 className="section-title">Programme Jeunesse</h2>
+                            <p className="section-subtitle">Investir dans la jeunesse, c'est construire l'avenir</p>
+                        </div>
+                        <div className="youth-grid">
+                            <div className="youth-card">
+                                <div className="youth-icon">
+                                    <i className="fas fa-hands-helping"></i>
+                                </div>
+                                <h3>Mentorat Artistique</h3>
+                                <p>Des artistes expérimentés accompagnent les jeunes talents dans leur développement créatif.</p>
+                                <a href="#" className="youth-link">En savoir plus <i className="fas fa-arrow-right"></i></a>
+                            </div>
+                            
+                            <div className="youth-card">
+                                <div className="youth-icon">
+                                    <i className="fas fa-trophy"></i>
+                                </div>
+                                <h3>Concours Thématiques</h3>
+                                <p>Participez à nos concours et faites évaluer votre travail par un jury communautaire.</p>
+                                <a href="#" className="youth-link">En savoir plus <i className="fas fa-arrow-right"></i></a>
+                            </div>
+                            
+                            <div className="youth-card">
+                                <div className="youth-icon">
+                                    <i className="fas fa-handshake"></i>
+                                </div>
+                                <h3>Partenariats Éducatifs</h3>
+                                <p>Collaborations avec les écoles locales pour intégrer l'art dans l'éducation.</p>
+                                <a href="#" className="youth-link">En savoir plus <i className="fas fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                        
+                        <div className="youth-stats">
+                            <div className="stat">
+                                <span className="stat-number">{youthStats.youth}+</span>
+                                <span className="stat-label">Jeunes impliqués</span>
+                            </div>
+                            <div className="stat">
+                                <span className="stat-number">{youthStats.mentors}</span>
+                                <span className="stat-label">Mentors actifs</span>
+                            </div>
+                            <div className="stat">
+                                <span className="stat-number">{youthStats.schools}</span>
+                                <span className="stat-label">Écoles partenaires</span>
+                            </div>
+                            <div className="stat">
+                                <span className="stat-number">{youthStats.contests}</span>
+                                <span className="stat-label">Concours annuels</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            );
+        }
+
+        // Composant Section Soutien
+        function SupportSection() {
+            return (
+                <section id="soutien" className="section bg-light">
+                    <div className="container">
+                        <div className="section-header">
+                            <h2 className="section-title">Soutien & Engagement</h2>
+                            <p className="section-subtitle">Contribuez à la pérennité de nos actions culturelles</p>
+                        </div>
+                        <div className="support-grid">
+                            <div className="support-card">
+                                <div className="support-icon">
+                                    <i className="fas fa-hand-holding-heart"></i>
+                                </div>
+                                <h3>Faire un Don</h3>
+                                <p>Soutenez nos activités culturelles et éducatives avec un don.</p>
+                                <div className="support-amounts">
+                                    <button className="amount-btn">10€</button>
+                                    <button className="amount-btn">25€</button>
+                                    <button className="amount-btn">50€</button>
+                                    <button className="amount-btn">Autre</button>
+                                </div>
+                                <a href="#" className="btn-primary">Faire un don</a>
+                            </div>
+                            
+                            <div className="support-card">
+                                <div className="support-icon">
+                                    <i className="fas fa-hands"></i>
+                                </div>
+                                <h3>Devenir Bénévole</h3>
+                                <p>Rejoignez notre équipe de bénévoles et contribuez à nos projets.</p>
+                                <div className="support-areas">
+                                    <span>Animation</span>
+                                    <span>Enseignement</span>
+                                    <span>Événements</span>
+                                </div>
+                                <a href="#" className="btn-primary">Devenir bénévole</a>
+                            </div>
+                            
+                            <div className="support-card">
+                                <div className="support-icon">
+                                    <i className="fas fa-lightbulb"></i>
+                                </div>
+                                <h3>Proposer une Idée</h3>
+                                <p>Partagez vos idées pour de nouveaux projets ou améliorations.</p>
+                                <div className="support-stats">
+                                    <span><i className="fas fa-lightbulb"></i> 42 idées proposées</span>
+                                    <span><i className="fas fa-check-circle"></i> 15 mises en œuvre</span>
+                                </div>
+                                <a href="#" className="btn-primary">Proposer une idée</a>
+                            </div>
+                        </div>
+                        
+                        <div className="contact-info">
+                            <div className="contact-card">
+                                <h3>Contactez-nous</h3>
+                                <div className="contact-details">
+                                    <div className="contact-item">
+                                        <i className="fas fa-phone"></i>
+                                        <div>
+                                            <span>+243 971 300 107</span>
+                                            <small>Lun - Ven, 9h - 17h</small>
+                                        </div>
+                                    </div>
+                                    <div className="contact-item">
+                                        <i className="fas fa-envelope"></i>
+                                        <div>
+                                            <span>patientkiwala@gmail.com</span>
+                                            <small>Réponse sous 24h</small>
+                                        </div>
+                                    </div>
+                                    <div className="contact-item">
+                                        <i className="fas fa-map-marker-alt"></i>
+                                        <div>
+                                            <span>Bashila, Lac Moero</span>
+                                            <small>République Démocratique du Congo</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div className="responsible-card">
+                                <div className="responsible-image">
+                                    <img src="images/responsable.jpg" alt="Patient Kiwala Mwape" />
+                                </div>
+                                <div className="responsible-info">
+                                    <h4>Patient Kiwala Mwape</h4>
+                                    <p className="responsible-title">Sage Pèlerin & Responsable ASHILAC</p>
+                                    <p className="responsible-quote">"La culture est le ciment qui unit notre communauté et l'art, le langage universel qui nous élève."</p>
+                                    <div className="responsible-contact">
+                                        <a href="#" className="btn-icon"><i className="fab fa-whatsapp"></i></a>
+                                        <a href="#" className="btn-icon"><i className="fas fa-envelope"></i></a>
+                                        <a href="#" className="btn-icon"><i className="fab fa-linkedin"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            );
+        }
+
+        // Composant Footer
+        function Footer() {
+            return (
+                <footer className="footer">
+                    <div className="container">
+                        <div className="footer-content">
+                            <div className="footer-section">
+                                <div className="footer-logo">
+                                    <img src="images/logo_ashilac_1.png" alt="Logo ASHILAC" />
+                                    <span>ASHILAC</span>
+                                </div>
+                                <p>Association Socio-Culturelle de Bashila du Lac Moero</p>
+                                <p>Valoriser la culture locale, connecter la communauté et engager les jeunes.</p>
+                                <div className="footer-social">
+                                    <a href="#"><i className="fab fa-facebook"></i></a>
+                                    <a href="#"><i className="fab fa-twitter"></i></a>
+                                    <a href="#"><i className="fab fa-instagram"></i></a>
+                                    <a href="#"><i className="fab fa-youtube"></i></a>
+                                    <a href="#"><i className="fab fa-whatsapp"></i></a>
+                                </div>
+                            </div>
+                            
+                            <div className="footer-section">
+                                <h3>Liens Rapides</h3>
+                                <ul>
+                                    <li><a href="#accueil">Accueil</a></li>
+                                    <li><a href="#evenements">Événements</a></li>
+                                    <li><a href="#galerie">Galerie</a></li>
+                                    <li><a href="#formation">Formation</a></li>
+                                    <li><a href="#jeunesse">Jeunesse</a></li>
+                                </ul>
+                            </div>
+                            
+                            <div className="footer-section">
+                                <h3>Ressources</h3>
+                                <ul>
+                                    <li><a href="#communaute">Communauté</a></li>
+                                    <li><a href="#soutien">Soutien</a></li>
+                                    <li><a href="#">FAQ</a></li>
+                                    <li><a href="#">Blog</a></li>
+                                    <li><a href="#">Mentions légales</a></li>
+                                </ul>
+                            </div>
+                            
+                            <div className="footer-section">
+                                <h3>Newsletter</h3>
+                                <p>Inscrivez-vous pour recevoir nos actualités</p>
+                                <form className="newsletter-form">
+                                    <input type="email" placeholder="Votre email" required />
+                                    <button type="submit"><i className="fas fa-paper-plane"></i></button>
+                                </form>
+                            </div>
+                        </div>
+                        
+                        <div className="footer-bottom">
+                            <p>&copy; 2023 ASHILAC. Tous droits réservés. | Conçu avec <i className="fas fa-heart"></i> par Patient Kiwala Mwape</p>
+                        </div>
+                    </div>
+                </footer>
+            );
+        }
+
+        // Composant Modal d'image
+        function ImageModal({ isOpen, image, onClose }) {
+            if (!isOpen || !image) return null;
+
+            return (
+                <div className={`modal ${isOpen ? 'active' : ''}`} onClick={onClose}>
+                    <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+                        <span className="close-modal" onClick={onClose}>&times;</span>
+                        <img src={image.image} alt={image.title} className="modal-image" />
+                        <div className="modal-info">
+                            <h3 className="modal-title">{image.title}</h3>
+                            <p className="modal-artist">Artiste: {image.artist}</p>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        // Composant Toast
+        function Toast({ show, message }) {
+            return (
+                <div className={`toast ${show ? 'active' : ''}`}>
+                    {message}
+                </div>
+            );
+        }
+
+        // Rendu de l'application
+        ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
+</body>
+</html>
