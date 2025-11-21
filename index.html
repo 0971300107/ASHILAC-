@@ -4,24 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ASHILAC - Association Socio-Culturelle de Bashila du Lac Moero</title>
-    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
-    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Reset et styles de base */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        /* === VARIABLES ET RESET === */
         :root {
             --primary-color: #1a472a;
             --secondary-color: #2d5a3d;
             --accent-color: #d4af37;
-            --accent-dark: #b8941f;
             --light-color: #f8f9fa;
             --dark-color: #212529;
             --text-color: #333;
@@ -34,6 +24,12 @@
             --gradient: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
         }
 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         html {
             scroll-behavior: smooth;
         }
@@ -42,7 +38,6 @@
             font-family: 'Poppins', sans-serif;
             line-height: 1.6;
             color: var(--text-color);
-            overflow-x: hidden;
             background-color: #fff;
         }
 
@@ -53,18 +48,18 @@
         }
 
         .section {
-            padding: 100px 0;
+            padding: 80px 0;
         }
 
         .bg-light {
-            background-color: #f8f9fa;
+            background-color: var(--light-color);
         }
 
         .text-center {
             text-align: center;
         }
 
-        /* Typographie */
+        /* === TYPOGRAPHIE === */
         h1, h2, h3, h4, h5, h6 {
             margin-bottom: 1rem;
             font-weight: 600;
@@ -72,25 +67,13 @@
             font-family: 'Playfair Display', serif;
         }
 
-        h1 {
-            font-size: 3rem;
-        }
-
-        h2 {
-            font-size: 2.5rem;
-        }
-
-        h3 {
-            font-size: 1.75rem;
-        }
-
-        p {
-            margin-bottom: 1rem;
-        }
+        h1 { font-size: 3rem; }
+        h2 { font-size: 2.5rem; }
+        h3 { font-size: 1.75rem; }
 
         .section-header {
             text-align: center;
-            margin-bottom: 4rem;
+            margin-bottom: 3rem;
         }
 
         .section-title {
@@ -115,7 +98,7 @@
             margin: 0 auto;
         }
 
-        /* Navigation */
+        /* === NAVIGATION === */
         .navbar {
             position: fixed;
             top: 0;
@@ -179,7 +162,7 @@
             transition: var(--transition);
         }
 
-        .nav-link:hover::after, .nav-link.active::after {
+        .nav-link:hover::after {
             width: 100%;
         }
 
@@ -188,6 +171,101 @@
             align-items: center;
             gap: 1rem;
             margin-left: 2rem;
+        }
+
+        /* Notification Bell */
+        .notification-container {
+            position: relative;
+        }
+
+        .notification-bell {
+            position: relative;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+
+        .notification-bell:hover {
+            background-color: rgba(0, 0, 0, 0.05);
+        }
+
+        .notification-bell i {
+            font-size: 1.2rem;
+            color: var(--text-color);
+        }
+
+        .notification-count {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background-color: #e74c3c;
+            color: white;
+            font-size: 0.7rem;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+        }
+
+        .notification-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            width: 300px;
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow-lg);
+            padding: 1rem;
+            display: none;
+            z-index: 1001;
+            margin-top: 10px;
+        }
+
+        .notification-dropdown.active {
+            display: block;
+        }
+
+        .notification-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .notification-header h3 {
+            font-size: 1rem;
+            margin: 0;
+        }
+
+        .notification-item {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid #f0f0f0;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .notification-item:hover {
+            background-color: #f9f9f9;
+        }
+
+        .notification-item:last-child {
+            border-bottom: none;
+        }
+
+        .notification-item p {
+            font-size: 0.9rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .notification-item small {
+            color: var(--text-light);
+            font-size: 0.7rem;
         }
 
         .btn-login {
@@ -230,7 +308,7 @@
             transition: var(--transition);
         }
 
-        /* Hero Section */
+        /* === HERO SECTION === */
         .hero {
             position: relative;
             display: flex;
@@ -275,7 +353,7 @@
         }
 
         .hero-title {
-            font-size: 4rem;
+            font-size: 3.5rem;
             margin-bottom: 1rem;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
         }
@@ -297,19 +375,12 @@
         .hero-image {
             flex: 1;
             text-align: center;
-            position: relative;
         }
 
         .hero-image img {
             max-width: 100%;
             border-radius: var(--border-radius);
             box-shadow: var(--box-shadow-lg);
-            transform: perspective(1000px) rotateY(-5deg);
-            transition: var(--transition);
-        }
-
-        .hero-image img:hover {
-            transform: perspective(1000px) rotateY(0);
         }
 
         .hero-buttons {
@@ -318,38 +389,7 @@
             margin-top: 2rem;
         }
 
-        .scroll-indicator {
-            position: absolute;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            text-align: center;
-            color: white;
-            font-size: 0.9rem;
-            opacity: 0.8;
-            animation: bounce 2s infinite;
-        }
-
-        .scroll-line {
-            width: 1px;
-            height: 40px;
-            background-color: white;
-            margin: 0.5rem auto 0;
-        }
-
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {
-                transform: translateX(-50%) translateY(0);
-            }
-            40% {
-                transform: translateX(-50%) translateY(-10px);
-            }
-            60% {
-                transform: translateX(-50%) translateY(-5px);
-            }
-        }
-
-        /* Boutons */
+        /* === BOUTONS === */
         .btn-primary, .btn-secondary, .btn-outline {
             display: inline-flex;
             align-items: center;
@@ -400,45 +440,36 @@
             transform: translateY(-3px);
         }
 
-        .btn-icon {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background-color: rgba(0, 0, 0, 0.05);
-            border: none;
-            color: var(--text-color);
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .btn-icon:hover {
-            background-color: var(--primary-color);
-            color: white;
-            transform: translateY(-2px);
-        }
-
-        /* Section Événements */
-        .events-grid {
+        /* === GRIDS ET CARDS === */
+        .events-grid, .community-grid, .formation-grid, .support-grid, .youth-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
             margin-bottom: 3rem;
         }
 
-        .event-card {
+        .event-card, .community-card, .formation-card, .support-card, .youth-card {
             background-color: white;
             border-radius: var(--border-radius);
             box-shadow: var(--box-shadow);
             overflow: hidden;
             transition: var(--transition);
+            position: relative;
         }
 
-        .event-card:hover {
+        .event-card:hover, .community-card:hover, .formation-card:hover, .support-card:hover, .youth-card:hover {
             transform: translateY(-10px);
             box-shadow: var(--box-shadow-lg);
+        }
+
+        .event-card::before, .community-card::before, .formation-card::before, .support-card::before, .youth-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--gradient);
         }
 
         .event-image {
@@ -484,12 +515,8 @@
             font-weight: 500;
         }
 
-        .event-info {
+        .event-info, .community-card, .formation-card, .support-card, .youth-card {
             padding: 1.5rem;
-        }
-
-        .event-info h3 {
-            margin-bottom: 0.5rem;
         }
 
         .event-meta {
@@ -513,40 +540,69 @@
             margin-top: 1.5rem;
         }
 
-        /* Section Communauté */
-        .community-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .community-card {
+        /* === CALENDRIER === */
+        .calendar-container {
+            max-width: 800px;
+            margin: 0 auto;
             background-color: white;
-            padding: 2.5rem 2rem;
             border-radius: var(--border-radius);
             box-shadow: var(--box-shadow);
-            text-align: center;
-            transition: var(--transition);
-            position: relative;
             overflow: hidden;
         }
 
-        .community-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 5px;
-            background: var(--gradient);
+        .calendar-header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1rem;
+            text-align: center;
         }
 
-        .community-card:hover {
-            transform: translateY(-10px);
-            box-shadow: var(--box-shadow-lg);
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 1px;
+            background-color: #eee;
         }
 
-        .community-icon {
+        .calendar-day {
+            background-color: white;
+            padding: 1rem;
+            text-align: center;
+            min-height: 100px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .calendar-day.weekend {
+            background-color: #f9f9f9;
+        }
+
+        .calendar-day.today {
+            background-color: #e8f4fd;
+            border: 2px solid var(--secondary-color);
+        }
+
+        .calendar-day.event {
+            background-color: #fff8e1;
+        }
+
+        .calendar-day .date {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .calendar-event {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 0.2rem 0.5rem;
+            border-radius: 3px;
+            font-size: 0.8rem;
+            margin-top: 0.5rem;
+        }
+
+        /* === ICONES === */
+        .community-icon, .formation-icon, .support-icon, .youth-icon {
             width: 80px;
             height: 80px;
             background: var(--gradient);
@@ -559,19 +615,49 @@
             font-size: 2rem;
         }
 
-        .community-card h3 {
-            margin-bottom: 1rem;
+        .youth-icon {
+            width: 70px;
+            height: 70px;
+            font-size: 1.8rem;
         }
 
-        .community-stats {
-            display: flex;
-            justify-content: space-between;
-            margin: 1.5rem 0;
-            font-size: 0.9rem;
+        /* === STATISTIQUES === */
+        .youth-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .stat {
+            text-align: center;
+            padding: 2rem 1.5rem;
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+        }
+
+        .stat:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--box-shadow-lg);
+        }
+
+        .stat-number {
+            display: block;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 1rem;
             color: var(--text-light);
+            margin-top: 0.5rem;
         }
 
-        /* Section Galerie */
+        /* === GALERIE === */
         .gallery-controls {
             display: flex;
             justify-content: space-between;
@@ -601,41 +687,6 @@
             background: var(--gradient);
             color: white;
             border-color: transparent;
-        }
-
-        .gallery-search {
-            display: flex;
-            align-items: center;
-            background-color: white;
-            border-radius: 30px;
-            padding: 5px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-
-        .search-input {
-            border: none;
-            padding: 8px 15px;
-            border-radius: 30px;
-            outline: none;
-            width: 200px;
-        }
-
-        .search-btn {
-            background: var(--gradient);
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 35px;
-            height: 35px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .search-btn:hover {
-            transform: scale(1.1);
         }
 
         .gallery-grid {
@@ -685,469 +736,200 @@
             transform: translateY(0);
         }
 
-        .gallery-info h3 {
-            margin-bottom: 0.5rem;
-            font-size: 1.2rem;
-        }
-
-        .gallery-info p {
-            margin-bottom: 1rem;
-            font-size: 0.9rem;
-            opacity: 0.9;
-        }
-
-        .gallery-actions {
-            display: flex;
-            gap: 0.5rem;
-        }
-
-        /* Section Formation */
-        .formation-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 2rem;
+        /* === CAROUSEL === */
+        .carousel {
+            position: relative;
+            overflow: hidden;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow-lg);
             margin-bottom: 3rem;
         }
 
-        .formation-card {
-            background-color: white;
-            padding: 2.5rem 2rem;
-            border-radius: var(--border-radius);
-            box-shadow: var(--box-shadow);
-            text-align: center;
-            transition: var(--transition);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .formation-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 5px;
-            background: var(--gradient);
-        }
-
-        .formation-card:hover {
-            transform: translateY(-10px);
-            box-shadow: var(--box-shadow-lg);
-        }
-
-        .formation-icon {
-            width: 80px;
-            height: 80px;
-            background: var(--gradient);
-            color: white;
-            border-radius: 50%;
+        .carousel-inner {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 1.5rem;
-            font-size: 2rem;
+            transition: transform 0.5s ease;
         }
 
-        .formation-card h3 {
-            margin-bottom: 1rem;
-        }
-
-        .formation-card ul {
-            text-align: left;
-            margin: 1.5rem 0;
-            padding-left: 1.5rem;
-        }
-
-        .formation-card li {
-            margin-bottom: 0.5rem;
+        .carousel-item {
+            min-width: 100%;
             position: relative;
         }
 
-        .formation-card li::before {
-            content: '•';
-            color: var(--primary-color);
-            font-weight: bold;
-            position: absolute;
-            left: -1rem;
+        .carousel-item img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
         }
 
-        .formation-meta {
+        .carousel-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+            color: white;
+            padding: 2rem;
+        }
+
+        .carousel-controls {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
             display: flex;
             justify-content: space-between;
-            margin: 1.5rem 0;
-            font-size: 0.9rem;
-            color: var(--text-light);
+            padding: 0 1rem;
+            transform: translateY(-50%);
         }
 
-        .challenge-section {
-            background-color: white;
-            padding: 2.5rem;
-            border-radius: var(--border-radius);
-            box-shadow: var(--box-shadow);
-        }
-
-        .challenge-header {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-
-        .challenge-info {
-            display: flex;
-            justify-content: center;
-        }
-
-        .challenge-current {
-            background-color: rgba(26, 71, 42, 0.05);
-            padding: 2rem;
-            border-radius: var(--border-radius);
-            text-align: center;
-            position: relative;
-            max-width: 500px;
-            width: 100%;
-        }
-
-        .challenge-badge {
-            position: absolute;
-            top: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--gradient);
+        .carousel-btn {
+            background: rgba(0, 0, 0, 0.5);
             color: white;
-            padding: 5px 15px;
-            border-radius: 30px;
-            font-size: 0.8rem;
-            font-weight: 500;
-        }
-
-        .challenge-current h4 {
-            margin-bottom: 0.5rem;
-        }
-
-        .challenge-progress {
-            margin: 1.5rem 0;
-        }
-
-        .progress-bar {
-            width: 100%;
-            height: 8px;
-            background-color: #e9ecef;
-            border-radius: 4px;
-            overflow: hidden;
-            margin-bottom: 0.5rem;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: var(--gradient);
-            border-radius: 4px;
-            transition: width 1s ease;
-        }
-
-        /* Section Jeunesse */
-        .youth-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-bottom: 3rem;
-        }
-
-        .youth-card {
-            background-color: white;
-            padding: 2.5rem 2rem;
-            border-radius: var(--border-radius);
-            box-shadow: var(--box-shadow);
-            text-align: center;
-            transition: var(--transition);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .youth-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 5px;
-            background: var(--gradient);
-        }
-
-        .youth-card:hover {
-            transform: translateY(-10px);
-            box-shadow: var(--box-shadow-lg);
-        }
-
-        .youth-icon {
-            width: 70px;
-            height: 70px;
-            background: var(--gradient);
-            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 1.5rem;
-            font-size: 1.8rem;
-        }
-
-        .youth-card h3 {
-            margin-bottom: 1rem;
-        }
-
-        .youth-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: var(--primary-color);
-            text-decoration: none;
-            font-weight: 500;
-            margin-top: 1rem;
-            transition: var(--transition);
-        }
-
-        .youth-link:hover {
-            gap: 1rem;
-        }
-
-        .youth-stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .stat {
-            text-align: center;
-            padding: 2rem 1.5rem;
-            background-color: white;
-            border-radius: var(--border-radius);
-            box-shadow: var(--box-shadow);
-            transition: var(--transition);
-        }
-
-        .stat:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--box-shadow-lg);
-        }
-
-        .stat-number {
-            display: block;
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--primary-color);
-            line-height: 1;
-        }
-
-        .stat-label {
-            font-size: 1rem;
-            color: var(--text-light);
-            margin-top: 0.5rem;
-        }
-
-        /* Section Soutien */
-        .support-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-bottom: 3rem;
-        }
-
-        .support-card {
-            background-color: white;
-            padding: 2.5rem 2rem;
-            border-radius: var(--border-radius);
-            box-shadow: var(--box-shadow);
-            text-align: center;
-            transition: var(--transition);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .support-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 5px;
-            background: var(--gradient);
-        }
-
-        .support-card:hover {
-            transform: translateY(-10px);
-            box-shadow: var(--box-shadow-lg);
-        }
-
-        .support-icon {
-            width: 80px;
-            height: 80px;
-            background: var(--gradient);
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 1.5rem;
-            font-size: 2rem;
-        }
-
-        .support-card h3 {
-            margin-bottom: 1rem;
-        }
-
-        .support-amounts, .support-areas {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin: 1.5rem 0;
-        }
-
-        .amount-btn {
-            padding: 8px 16px;
-            background-color: #f8f9fa;
-            border: 1px solid #dee2e6;
-            border-radius: var(--border-radius-sm);
             cursor: pointer;
             transition: var(--transition);
         }
 
-        .amount-btn:hover {
-            background-color: var(--primary-color);
-            color: white;
-            border-color: var(--primary-color);
+        .carousel-btn:hover {
+            background: rgba(0, 0, 0, 0.8);
         }
 
-        .support-areas span {
-            padding: 5px 10px;
-            background-color: rgba(26, 71, 42, 0.1);
-            color: var(--primary-color);
-            border-radius: 30px;
-            font-size: 0.9rem;
-        }
-
-        .support-stats {
+        .carousel-indicators {
+            position: absolute;
+            bottom: 20px;
+            left: 0;
+            right: 0;
             display: flex;
-            justify-content: space-between;
-            margin: 1.5rem 0;
-            font-size: 0.9rem;
-            color: var(--text-light);
+            justify-content: center;
+            gap: 10px;
         }
 
-        .contact-info {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-            margin-top: 3rem;
+        .carousel-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: var(--transition);
         }
 
-        .contact-card {
-            background-color: white;
-            padding: 2.5rem;
-            border-radius: var(--border-radius);
-            box-shadow: var(--box-shadow);
+        .carousel-indicator.active {
+            background: white;
         }
 
-        .contact-card h3 {
-            margin-bottom: 1.5rem;
+        /* === GEOLOCALISATION === */
+        .geolocation-section {
+            background: var(--gradient);
+            color: white;
+            padding: 3rem 0;
             text-align: center;
         }
 
-        .contact-details {
+        .location-info {
             display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
         }
 
-        .contact-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 1rem;
+        .location-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            backdrop-filter: blur(10px);
         }
 
-        .contact-item i {
-            color: var(--primary-color);
-            font-size: 1.2rem;
-            margin-top: 0.2rem;
+        /* === CONTRIBUTIONS === */
+        .contribution-section {
+            background-color: var(--light-color);
+            padding: 3rem 0;
         }
 
-        .contact-item div {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .contact-item span {
-            font-weight: 500;
-        }
-
-        .contact-item small {
-            color: var(--text-light);
-            font-size: 0.8rem;
-        }
-
-        .responsible-card {
-            background-color: white;
-            padding: 2.5rem;
+        .contribution-card {
+            background: white;
+            padding: 2rem;
             border-radius: var(--border-radius);
             box-shadow: var(--box-shadow);
-            display: flex;
-            gap: 1.5rem;
-            align-items: center;
+            text-align: center;
+            max-width: 500px;
+            margin: 0 auto;
         }
 
-        .responsible-image {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            overflow: hidden;
-            flex-shrink: 0;
-            background-color: #e9ecef;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--text-light);
-        }
-
-        .responsible-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .responsible-info h4 {
-            margin-bottom: 0.5rem;
-            font-size: 1.3rem;
-        }
-
-        .responsible-title {
-            color: var(--primary-color);
-            font-weight: 500;
-            margin-bottom: 1rem;
-            font-size: 0.9rem;
-        }
-
-        .responsible-quote {
-            font-style: italic;
-            margin-bottom: 1.5rem;
-            position: relative;
-            padding-left: 1.5rem;
-        }
-
-        .responsible-quote::before {
-            content: '"';
-            position: absolute;
-            left: 0;
-            top: -0.5rem;
+        .contribution-amount {
             font-size: 2rem;
-            color: var(--accent-color);
+            font-weight: bold;
+            color: var(--primary-color);
+            margin: 1rem 0;
         }
 
-        .responsible-contact {
-            display: flex;
-            gap: 0.5rem;
+        /* === FORMULAIRES === */
+        .contact-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
         }
 
-        /* Footer */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius-sm);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(26, 71, 42, 0.1);
+        }
+
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .message {
+            padding: 12px 15px;
+            border-radius: var(--border-radius-sm);
+            margin-bottom: 1rem;
+            display: none;
+        }
+
+        .message.success {
+            background-color: #d4edda;
+            color: #155724;
+            display: block;
+        }
+
+        .message.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            display: block;
+        }
+
+        /* === FOOTER === */
         .footer {
             background-color: var(--dark-color);
             color: white;
@@ -1203,6 +985,7 @@
             border-radius: 50%;
             color: white;
             transition: var(--transition);
+            text-decoration: none;
         }
 
         .footer-social a:hover {
@@ -1268,7 +1051,7 @@
             color: #e74c3c;
         }
 
-        /* Modal */
+        /* === MODAL === */
         .modal {
             display: none;
             position: fixed;
@@ -1329,16 +1112,7 @@
             background-color: white;
         }
 
-        .modal-title {
-            margin-bottom: 0.5rem;
-        }
-
-        .modal-artist {
-            color: var(--text-light);
-            font-size: 0.9rem;
-        }
-
-        /* Toast */
+        /* === TOAST === */
         .toast {
             position: fixed;
             bottom: 20px;
@@ -1359,72 +1133,10 @@
             opacity: 1;
         }
 
-        /* Animations */
-        .section {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.6s ease, transform 0.6s ease;
-        }
-        
-        .section.animate-in {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        
-        .event-card, .community-card, .formation-card, .youth-card, .support-card, .gallery-item, .stat {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.6s ease, transform 0.6s ease;
-        }
-        
-        .animate-in .event-card, 
-        .animate-in .community-card, 
-        .animate-in .formation-card, 
-        .animate-in .youth-card, 
-        .animate-in .support-card,
-        .animate-in .gallery-item,
-        .animate-in .stat {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        
-        .animate-in .event-card:nth-child(1) { transition-delay: 0.1s; }
-        .animate-in .event-card:nth-child(2) { transition-delay: 0.2s; }
-        .animate-in .event-card:nth-child(3) { transition-delay: 0.3s; }
-        
-        .animate-in .community-card:nth-child(1) { transition-delay: 0.1s; }
-        .animate-in .community-card:nth-child(2) { transition-delay: 0.2s; }
-        .animate-in .community-card:nth-child(3) { transition-delay: 0.3s; }
-        
-        .animate-in .formation-card:nth-child(1) { transition-delay: 0.1s; }
-        .animate-in .formation-card:nth-child(2) { transition-delay: 0.2s; }
-        .animate-in .formation-card:nth-child(3) { transition-delay: 0.3s; }
-        
-        .animate-in .youth-card:nth-child(1) { transition-delay: 0.1s; }
-        .animate-in .youth-card:nth-child(2) { transition-delay: 0.2s; }
-        .animate-in .youth-card:nth-child(3) { transition-delay: 0.3s; }
-        
-        .animate-in .support-card:nth-child(1) { transition-delay: 0.1s; }
-        .animate-in .support-card:nth-child(2) { transition-delay: 0.2s; }
-        .animate-in .support-card:nth-child(3) { transition-delay: 0.3s; }
-        
-        .animate-in .gallery-item {
-            transition-delay: calc(0.1s * var(--i));
-        }
-        
-        .animate-in .stat:nth-child(1) { transition-delay: 0.1s; }
-        .animate-in .stat:nth-child(2) { transition-delay: 0.2s; }
-        .animate-in .stat:nth-child(3) { transition-delay: 0.3s; }
-        .animate-in .stat:nth-child(4) { transition-delay: 0.4s; }
-
-        /* Responsive Design */
+        /* === RESPONSIVE === */
         @media (max-width: 1200px) {
             .hero-title {
-                font-size: 3.5rem;
-            }
-            
-            .hero-content {
-                gap: 3rem;
+                font-size: 3rem;
             }
         }
 
@@ -1447,13 +1159,8 @@
                 justify-content: center;
             }
             
-            h1 {
-                font-size: 2.5rem;
-            }
-            
-            h2 {
-                font-size: 2rem;
-            }
+            h1 { font-size: 2.5rem; }
+            h2 { font-size: 2rem; }
             
             .contact-info {
                 grid-template-columns: 1fr;
@@ -1462,6 +1169,14 @@
             .responsible-card {
                 flex-direction: column;
                 text-align: center;
+            }
+            
+            .contact-form {
+                grid-template-columns: 1fr;
+            }
+            
+            .carousel-item img {
+                height: 400px;
             }
         }
 
@@ -1519,7 +1234,7 @@
             }
             
             .section {
-                padding: 80px 0;
+                padding: 60px 0;
             }
             
             .gallery-controls {
@@ -1527,12 +1242,27 @@
                 align-items: flex-start;
             }
             
-            .gallery-search {
-                width: 100%;
+            .carousel-item img {
+                height: 300px;
             }
             
-            .search-input {
-                width: 100%;
+            .calendar-day {
+                padding: 0.5rem;
+                min-height: 80px;
+            }
+            
+            .calendar-day .date {
+                font-size: 0.9rem;
+            }
+            
+            .calendar-event {
+                font-size: 0.7rem;
+                padding: 0.1rem 0.3rem;
+            }
+            
+            .notification-dropdown {
+                width: 250px;
+                right: -50px;
             }
         }
 
@@ -1549,19 +1279,6 @@
                 font-size: 1.1rem;
             }
             
-            .event-card {
-                flex-direction: column;
-            }
-            
-            .gallery-filters {
-                gap: 0.5rem;
-            }
-            
-            .filter-btn {
-                padding: 6px 12px;
-                font-size: 0.9rem;
-            }
-            
             .footer-content {
                 grid-template-columns: 1fr;
                 gap: 2rem;
@@ -1570,10 +1287,432 @@
     </style>
 </head>
 <body>
-    <div id="root"></div>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="#accueil">
+                    <img src="images/logo_ashilac_1.png" alt="Logo ASHILAC" class="logo">
+                    <span>ASHILAC</span>
+                </a>
+            </div>
+            <div class="nav-menu" id="nav-menu">
+                <a href="#accueil" class="nav-link active">Accueil</a>
+                <a href="#evenements" class="nav-link">Événements</a>
+                <a href="#communaute" class="nav-link">Communauté</a>
+                <a href="#galerie" class="nav-link">Galerie</a>
+                <a href="#formation" class="nav-link">Formation</a>
+                <a href="#jeunesse" class="nav-link">Jeunesse</a>
+                <a href="#soutien" class="nav-link">Soutien</a>
+                <div class="nav-right">
+                    <div class="notification-container">
+                        <div class="notification-bell" id="notification-bell">
+                            <i class="fas fa-bell"></i>
+                            <span class="notification-count">3</span>
+                        </div>
+                        <div class="notification-dropdown" id="notification-dropdown">
+                            <div class="notification-header">
+                                <h3>Notifications</h3>
+                                <a href="#" style="font-size: 0.8rem; color: var(--primary-color);">Tout marquer comme lu</a>
+                            </div>
+                            <div class="notification-item">
+                                <p>Nouvel événement ajouté</p>
+                                <small>Il y a 2 heures</small>
+                            </div>
+                            <div class="notification-item">
+                                <p>Rappel: Réunion dimanche à 15h</p>
+                                <small>Il y a 1 jour</small>
+                            </div>
+                            <div class="notification-item">
+                                <p>Nouveau partenaire: Simpya</p>
+                                <small>Il y a 2 jours</small>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#" class="btn-login"><i class="fas fa-user"></i> Connexion</a>
+                    <a href="#" class="btn-register">S'inscrire</a>
+                </div>
+            </div>
+            <div class="nav-toggle" id="nav-toggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
 
-    <script type="text/babel">
-        // Données de l'application
+    <!-- Hero Section -->
+    <section id="accueil" class="hero">
+        <div class="hero-background">
+            <div class="hero-overlay"></div>
+        </div>
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1 class="hero-title">ASHILAC</h1>
+                <h2 class="hero-subtitle">Association Socio-Culturelle de Bashila du Lac Moero</h2>
+                <p class="hero-description">Valoriser la culture locale, connecter la communauté et engager les jeunes autour des arts et traditions du Lac Moero.</p>
+                <div class="hero-buttons">
+                    <a href="#evenements" class="btn-primary">Découvrir nos événements</a>
+                    <a href="#communaute" class="btn-secondary">Rejoindre la communauté</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="images/image1.jpg" alt="Culture du Lac Moero">
+            </div>
+        </div>
+    </section>
+
+    <!-- Géolocalisation Section -->
+    <section class="geolocation-section">
+        <div class="container">
+            <h2 class="section-title" style="color: white;">Notre Localisation</h2>
+            <p style="margin-bottom: 2rem; opacity: 0.9;">Découvrez où nous nous trouvons et rejoignez notre communauté</p>
+            <div class="location-info">
+                <div class="location-item">
+                    <i class="fas fa-map-marker-alt" style="font-size: 2rem; margin-bottom: 1rem;"></i>
+                    <h3>Bashila, Lac Moero</h3>
+                    <p>République Démocratique du Congo</p>
+                </div>
+                <div class="location-item">
+                    <i class="fas fa-users" style="font-size: 2rem; margin-bottom: 1rem;"></i>
+                    <h3>Communauté Active</h3>
+                    <p>Plus de 400 membres</p>
+                </div>
+                <div class="location-item">
+                    <i class="fas fa-calendar-alt" style="font-size: 2rem; margin-bottom: 1rem;"></i>
+                    <h3>Événements Réguliers</h3>
+                    <p>Chaque semaine</p>
+                </div>
+            </div>
+            <button class="btn-secondary" onclick="getLocation()" style="margin-top: 2rem;">
+                <i class="fas fa-location-arrow"></i> Localiser ASHILAC
+            </button>
+            <div id="location-result" style="margin-top: 1rem;"></div>
+        </div>
+    </section>
+
+    <!-- Carousel -->
+    <section class="section">
+        <div class="container">
+            <div class="carousel" id="main-carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="images/image2.jpg" alt="Festival Culturel">
+                        <div class="carousel-caption">
+                            <h3>Festival Annuel de la Culture</h3>
+                            <p>Célébrons ensemble la richesse de notre patrimoine culturel</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="images/image3.jpg" alt="Formation Jeunesse">
+                        <div class="carousel-caption">
+                            <h3>Formation des Jeunes Artistes</h3>
+                            <p>Investir dans la jeunesse pour préserver notre héritage</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="images/image4.jpg" alt="Artisanat Local">
+                        <div class="carousel-caption">
+                            <h3>Artisanat Traditionnel</h3>
+                            <p>Préservation des techniques ancestrales</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-controls">
+                    <button class="carousel-btn" onclick="prevSlide()">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button class="carousel-btn" onclick="nextSlide()">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+                <div class="carousel-indicators">
+                    <button class="carousel-indicator active" onclick="goToSlide(0)"></button>
+                    <button class="carousel-indicator" onclick="goToSlide(1)"></button>
+                    <button class="carousel-indicator" onclick="goToSlide(2)"></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Contributions Kasumbalesa -->
+    <section class="contribution-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Contributions en Ligne</h2>
+                <p class="section-subtitle">Soutenez nos actions culturelles via Kasumbalesa</p>
+            </div>
+            <div class="contribution-card">
+                <div class="support-icon">
+                    <i class="fas fa-hand-holding-usd"></i>
+                </div>
+                <h3>Contribution Kasumbalesa</h3>
+                <p>Participez au développement de notre association avec une contribution de 22 500 FC via notre plateforme sécurisée</p>
+                <div class="contribution-amount">22 500 FC</div>
+                <p style="color: var(--text-light); margin-bottom: 2rem;">Votre contribution nous aide à organiser des événements culturels et former les jeunes</p>
+                <a href="https://maassioh.mychariow.shop/prd_mxyh6e" class="btn-primary" target="_blank" style="text-decoration: none;">
+                    <i class="fas fa-external-link-alt"></i> Faire une contribution
+                </a>
+                <p style="margin-top: 1rem; font-size: 0.9rem; color: var(--text-light);">
+                    <i class="fas fa-lock"></i> Paiement sécurisé via Kasumbalesa
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Événements Section -->
+    <section id="evenements" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Événements & Culture</h2>
+                <p class="section-subtitle">Découvrez notre programmation culturelle riche et variée</p>
+            </div>
+            <div class="events-grid">
+                <!-- Les cartes événements seront générées par JavaScript -->
+            </div>
+            <div class="text-center">
+                <a href="#" class="btn-primary">Voir tous les événements <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Événements Réguliers Section -->
+    <section id="evenements-reguliers" class="section bg-light">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Événements Réguliers</h2>
+                <p class="section-subtitle">Rendez-vous chaque dimanche à 15h pour notre réunion hebdomadaire</p>
+            </div>
+            <div class="calendar-container">
+                <div class="calendar-header">
+                    <h3>Calendrier des Événements Réguliers</h3>
+                    <p>Réunion ASHILAC - Chaque dimanche à 15h</p>
+                </div>
+                <div class="calendar-grid" id="calendar-grid">
+                    <!-- Les jours du calendrier seront générés par JavaScript -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Communauté Section -->
+    <section id="communaute" class="section bg-light">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Communauté & Partenaires</h2>
+                <p class="section-subtitle">Nos partenaires qui nous soutiennent dans nos actions</p>
+            </div>
+            <div class="community-grid">
+                <div class="community-card">
+                    <div class="community-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h3>Simpya</h3>
+                    <p>Partenaire principal dans nos initiatives de développement communautaire et culturel.</p>
+                    <a href="#" class="btn-outline">Visiter le site</a>
+                </div>
+                <div class="community-card">
+                    <div class="community-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Jeunesse Active</h3>
+                    <p>Association soeur engagée dans l'émancipation des jeunes de la région.</p>
+                    <a href="#" class="btn-outline">En savoir plus</a>
+                </div>
+                <div class="community-card">
+                    <div class="community-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3>Éducation Pour Tous</h3>
+                    <p>Partenaire éducatif pour nos programmes de formation et d'alphabétisation.</p>
+                    <a href="#" class="btn-outline">Découvrir</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Galerie Section -->
+    <section id="galerie" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Galerie d'Art</h2>
+                <p class="section-subtitle">Découvrez les talents artistiques de notre communauté</p>
+            </div>
+            <div class="gallery-controls">
+                <div class="gallery-filters">
+                    <button class="filter-btn active" data-filter="all">Tous</button>
+                    <button class="filter-btn" data-filter="peinture">Peinture</button>
+                    <button class="filter-btn" data-filter="sculpture">Sculpture</button>
+                    <button class="filter-btn" data-filter="photo">Photo</button>
+                </div>
+            </div>
+            <div class="gallery-grid" id="gallery-container">
+                <!-- Les éléments de galerie seront générés par JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Formation Section -->
+    <section id="formation" class="section bg-light">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Formation & Création</h2>
+                <p class="section-subtitle">Développez vos talents avec nos programmes de formation</p>
+            </div>
+            <div class="formation-grid">
+                <!-- Les cartes formation seront générées par JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Jeunesse Section -->
+    <section id="jeunesse" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Programme Jeunesse</h2>
+                <p class="section-subtitle">Investir dans la jeunesse, c'est construire l'avenir</p>
+            </div>
+            <div class="youth-grid">
+                <!-- Les cartes jeunesse seront générées par JavaScript -->
+            </div>
+            <div class="youth-stats">
+                <!-- Les statistiques seront générées par JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Soutien Section -->
+    <section id="soutien" class="section bg-light">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Soutien & Engagement</h2>
+                <p class="section-subtitle">Contribuez à la pérennité de nos actions culturelles</p>
+            </div>
+            <div class="support-grid">
+                <!-- Les cartes soutien seront générées par JavaScript -->
+            </div>
+
+            <div class="contact-info" style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 3rem;">
+                <div class="contact-card" style="background-color: white; padding: 2.5rem; border-radius: var(--border-radius); box-shadow: var(--box-shadow);">
+                    <h3 style="margin-bottom: 1.5rem; text-align: center;">Contactez-nous</h3>
+                    <div class="message" id="contact-message"></div>
+                    <form class="contact-form" id="contact-form">
+                        <div class="form-group">
+                            <label class="form-label">Nom complet</label>
+                            <input type="text" class="form-control" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Adresse email</label>
+                            <input type="email" class="form-control" name="email" required>
+                        </div>
+                        <div class="form-group full-width">
+                            <label class="form-label">Sujet</label>
+                            <input type="text" class="form-control" name="subject" required>
+                        </div>
+                        <div class="form-group full-width">
+                            <label class="form-label">Message</label>
+                            <textarea class="form-control" name="message" required></textarea>
+                        </div>
+                        <div class="form-group full-width">
+                            <button type="submit" class="btn-primary" style="width: 100%;">Envoyer le message</button>
+                        </div>
+                    </form>
+                </div>
+                
+                <div class="responsible-card" style="background-color: white; padding: 2.5rem; border-radius: var(--border-radius); box-shadow: var(--box-shadow); display: flex; gap: 1.5rem; align-items: center;">
+                    <div class="responsible-image" style="width: 120px; height: 120px; border-radius: 50%; overflow: hidden; flex-shrink: 0;">
+                        <img src="patient-kiwala.jpg" alt="Patient Kiwala Mwape" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <div class="responsible-info">
+                        <h4>Patient Kiwala Mwape</h4>
+                        <p class="responsible-title" style="color: var(--primary-color); font-weight: 500; margin-bottom: 1rem; font-size: 0.9rem;">Concepteur & Responsable ASHILAC</p>
+                        <p class="responsible-quote" style="font-style: italic; margin-bottom: 1.5rem; position: relative; padding-left: 1.5rem;">"La culture est le ciment qui unit notre communauté et l'art, le langage universel qui nous élève."</p>
+                        <div class="responsible-contact" style="display: flex; gap: 0.5rem;">
+                            <a href="https://wa.me/243971300107" class="btn-icon" style="display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 50%; background-color: rgba(0, 0, 0, 0.05); color: var(--text-color); text-decoration: none; transition: var(--transition);" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                            <a href="mailto:patientkiwala@gmail.com" class="btn-icon" style="display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 50%; background-color: rgba(0, 0, 0, 0.05); color: var(--text-color); text-decoration: none; transition: var(--transition);"><i class="fas fa-envelope"></i></a>
+                            <a href="https://chat.whatsapp.com/FZr4Z14DFpSI3DDWyOLu3W?mode=wwt" class="btn-icon" style="display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 50%; background-color: rgba(0, 0, 0, 0.05); color: var(--text-color); text-decoration: none; transition: var(--transition);" target="_blank"><i class="fas fa-users"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <img src="images/logo_ashilac_1.png" alt="Logo ASHILAC">
+                        <span>ASHILAC</span>
+                    </div>
+                    <p>Association Socio-Culturelle de Bashila du Lac Moero</p>
+                    <p>Valoriser la culture locale, connecter la communauté et engager les jeunes.</p>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="https://wa.me/243971300107" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Liens Rapides</h3>
+                    <ul>
+                        <li><a href="#accueil">Accueil</a></li>
+                        <li><a href="#evenements">Événements</a></li>
+                        <li><a href="#communaute">Communauté</a></li>
+                        <li><a href="#galerie">Galerie</a></li>
+                        <li><a href="#formation">Formation</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <ul>
+                        <li><i class="fas fa-phone"></i> +243 971 300 107</li>
+                        <li><i class="fas fa-envelope"></i> patientkiwala@gmail.com</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Bashila, Lac Moero</li>
+                        <li><i class="fab fa-whatsapp"></i> <a href="https://chat.whatsapp.com/FZr4Z14DFpSI3DDWyOLu3W?mode=wwt" style="color: #adb5bd; text-decoration: none;">Groupe WhatsApp</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Newsletter</h3>
+                    <p>Inscrivez-vous pour recevoir nos actualités</p>
+                    <div class="message" id="newsletter-message"></div>
+                    <form class="newsletter-form" id="newsletter-form">
+                        <input type="email" name="newsletter_email" placeholder="Votre email" required>
+                        <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2023 ASHILAC. Tous droits réservés. | Conçu avec <i class="fas fa-heart"></i> par Patient Kiwala Mwape</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal Image -->
+    <div class="modal" id="image-modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <img class="modal-image" id="modal-image" src="" alt="">
+            <div class="modal-info">
+                <h3 id="modal-title"></h3>
+                <p id="modal-artist"></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast"></div>
+
+    <script>
+        // === DONNÉES DE L'APPLICATION ===
         const appData = {
             events: [
                 {
@@ -1583,7 +1722,7 @@
                     date: { day: "15", month: "Oct" },
                     location: "Centre Culturel ASHILAC",
                     time: "18:00 - 22:00",
-                    image: "images/image2.jpg"
+                    image: "images/image5.jpg"
                 },
                 {
                     id: 2,
@@ -1592,7 +1731,7 @@
                     date: { day: "22", month: "Oct" },
                     location: "Atelier d'Art ASHILAC",
                     time: "10:00 - 16:00",
-                    image: "images/image3.jpg"
+                    image: "images/image6.jpg"
                 },
                 {
                     id: 3,
@@ -1601,832 +1740,641 @@
                     date: { day: "05", month: "Nov" },
                     location: "Galerie ASHILAC",
                     time: "09:00 - 17:00",
-                    image: "images/image4.jpg"
+                    image: "images/image7.jpg"
                 }
             ],
-            galleryItems: [
+            community: [
+                {
+                    icon: "comments",
+                    title: "Forum de Discussion",
+                    description: "Participez aux conversations thématiques sur la culture, l'art et les initiatives locales.",
+                    stats: [
+                        { icon: "users", text: "245 membres actifs" },
+                        { icon: "comment", text: "1200 discussions" }
+                    ]
+                },
+                {
+                    icon: "users",
+                    title: "Chat en Temps Réel",
+                    description: "Échangez en direct avec d'autres membres de la communauté ASHILAC.",
+                    stats: [
+                        { icon: "user-clock", text: "87 en ligne" },
+                        { icon: "comment-dots", text: "Chat actif" }
+                    ]
+                },
+                {
+                    icon: "chart-pie",
+                    title: "Sondages Communautaires",
+                    description: "Donnez votre avis sur les projets et événements futurs d'ASHILAC.",
+                    stats: [
+                        { icon: "poll", text: "12 sondages actifs" },
+                        { icon: "vote-yea", text: "89% participation" }
+                    ]
+                }
+            ],
+            formation: [
+                {
+                    icon: "music",
+                    title: "Ateliers Musicaux",
+                    description: "Apprenez à créer de la musique avec des instruments traditionnels et modernes.",
+                    items: ["Instruments traditionnels", "Production musicale", "Composition"],
+                    meta: [
+                        { icon: "clock", text: "12 semaines" },
+                        { icon: "user-graduate", text: "Niveau débutant" }
+                    ]
+                },
+                {
+                    icon: "paint-brush",
+                    title: "Arts Visuels",
+                    description: "Développez vos compétences en peinture, dessin et arts numériques.",
+                    items: ["Techniques de dessin", "Peinture traditionnelle", "Art numérique"],
+                    meta: [
+                        { icon: "clock", text: "8 semaines" },
+                        { icon: "user-graduate", text: "Tous niveaux" }
+                    ]
+                },
+                {
+                    icon: "video",
+                    title: "Production Vidéo",
+                    description: "Maîtrisez les techniques de réalisation et montage vidéo.",
+                    items: ["Réalisation", "Montage vidéo", "Post-production"],
+                    meta: [
+                        { icon: "clock", text: "10 semaines" },
+                        { icon: "user-graduate", text: "Niveau intermédiaire" }
+                    ]
+                }
+            ],
+            youth: [
+                {
+                    icon: "hands-helping",
+                    title: "Mentorat Artistique",
+                    description: "Des artistes expérimentés accompagnent les jeunes talents dans leur développement créatif."
+                },
+                {
+                    icon: "trophy",
+                    title: "Concours Thématiques",
+                    description: "Participez à nos concours et faites évaluer votre travail par un jury communautaire."
+                },
+                {
+                    icon: "handshake",
+                    title: "Partenariats Éducatifs",
+                    description: "Collaborations avec les écoles locales pour intégrer l'art dans l'éducation."
+                }
+            ],
+            youthStats: [
+                { number: "150", label: "Jeunes impliqués" },
+                { number: "25", label: "Mentors actifs" },
+                { number: "12", label: "Écoles partenaires" },
+                { number: "8", label: "Concours annuels" }
+            ],
+            support: [
+                {
+                    icon: "hand-holding-heart",
+                    title: "Faire un Don",
+                    description: "Soutenez nos activités culturelles et éducatives avec un don.",
+                    amounts: ["10€", "25€", "50€", "Autre"],
+                    link: "https://maassioh.mychariow.shop/prd_mxyh6e"
+                },
+                {
+                    icon: "hands",
+                    title: "Devenir Bénévole",
+                    description: "Rejoignez notre équipe de bénévoles et contribuez à nos projets.",
+                    areas: ["Animation", "Enseignement", "Événements"]
+                },
+                {
+                    icon: "lightbulb",
+                    title: "Proposer une Idée",
+                    description: "Partagez vos idées pour de nouveaux projets ou améliorations.",
+                    stats: [
+                        { icon: "lightbulb", text: "42 idées proposées" },
+                        { icon: "check-circle", text: "15 mises en œuvre" }
+                    ]
+                }
+            ],
+            gallery: [
                 {
                     id: 1,
                     title: "Harmonie du Lac",
                     artist: "Jean Mutombo",
                     category: "peinture",
-                    image: "images/image5.jpg"
+                    image: "images/image8.jpg"
                 },
                 {
                     id: 2,
                     title: "Esprit Ancestral",
                     artist: "Marie Kabasele",
                     category: "sculpture",
-                    image: "images/image6.jpg"
+                    image: "images/image9.jpg"
                 },
                 {
                     id: 3,
                     title: "Reflets du Soir",
                     artist: "Paul Ilunga",
                     category: "photo",
-                    image: "images/image7.jpg"
+                    image: "images/image10.jpg"
                 },
                 {
                     id: 4,
                     title: "Vannerie Traditionnelle",
                     artist: "Annette Tshibanda",
                     category: "artisanat",
-                    image: "images/image8.jpg"
-                },
-                {
-                    id: 5,
-                    title: "Danse des Couleurs",
-                    artist: "Samuel Ntumba",
-                    category: "peinture",
-                    image: "images/image9.jpg"
-                },
-                {
-                    id: 6,
-                    title: "Masque Cérémoniel",
-                    artist: "Joseph Kalala",
-                    category: "sculpture",
-                    image: "images/image10.jpg"
+                    image: "images/image11.jpg"
                 }
-            ],
-            communityStats: {
-                members: 245,
-                discussions: 1200,
-                online: 87,
-                polls: 12,
-                participation: 89
-            },
-            youthStats: {
-                youth: 150,
-                mentors: 25,
-                schools: 12,
-                contests: 8
-            }
+            ]
         };
 
-        // Composant principal de l'application
-        function App() {
-            const [activeSection, setActiveSection] = React.useState('accueil');
-            const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
-            const [galleryFilter, setGalleryFilter] = React.useState('all');
-            const [searchTerm, setSearchTerm] = React.useState('');
-            const [modalOpen, setModalOpen] = React.useState(false);
-            const [selectedImage, setSelectedImage] = React.useState(null);
-            const [toast, setToast] = React.useState({ show: false, message: '' });
+        // === INITIALISATION ===
+        document.addEventListener('DOMContentLoaded', function() {
+            initNavigation();
+            renderEvents();
+            renderCommunity();
+            renderFormation();
+            renderYouth();
+            renderSupport();
+            renderGallery();
+            initCarousel();
+            initForms();
+            generateCalendar();
+            initNotifications();
+        });
 
-            // Gestion du scroll pour la navigation active
-            React.useEffect(() => {
-                const handleScroll = () => {
-                    const sections = document.querySelectorAll('section');
-                    const scrollPos = window.scrollY + 100;
-                    
-                    sections.forEach(section => {
-                        const sectionTop = section.offsetTop;
-                        const sectionHeight = section.offsetHeight;
-                        const sectionId = section.getAttribute('id');
-                        
-                        if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
-                            setActiveSection(sectionId);
-                        }
-                    });
-                };
-
-                window.addEventListener('scroll', handleScroll);
-                return () => window.removeEventListener('scroll', handleScroll);
-            }, []);
-
-            // Animation des statistiques
-            React.useEffect(() => {
-                const statsSection = document.querySelector('#jeunesse');
-                if (!statsSection) return;
-
-                const observer = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            // Animation des statistiques
-                            const stats = document.querySelectorAll('.stat-number');
-                            stats.forEach(stat => {
-                                const target = parseInt(stat.textContent);
-                                let current = 0;
-                                const increment = target / 50;
-                                
-                                const timer = setInterval(() => {
-                                    current += increment;
-                                    if (current >= target) {
-                                        current = target;
-                                        clearInterval(timer);
-                                    }
-                                    stat.textContent = Math.floor(current) + (stat.textContent.includes('+') ? '+' : '');
-                                }, 30);
-                            });
-                            
-                            observer.unobserve(entry.target);
-                        }
-                    });
-                }, { threshold: 0.5 });
-
-                observer.observe(statsSection);
-            }, []);
-
-            // Fonction pour afficher les notifications toast
-            const showToast = (message) => {
-                setToast({ show: true, message });
-                setTimeout(() => {
-                    setToast({ show: false, message: '' });
-                }, 3000);
-            };
-
-            // Filtrer les éléments de la galerie
-            const filteredGalleryItems = appData.galleryItems.filter(item => {
-                const matchesCategory = galleryFilter === 'all' || item.category === galleryFilter;
-                const matchesSearch = searchTerm === '' || 
-                    item.title.toLowerCase().includes(searchTerm.toLowerCase()) || 
-                    item.artist.toLowerCase().includes(searchTerm.toLowerCase());
-                
-                return matchesCategory && matchesSearch;
+        // === NAVIGATION ===
+        function initNavigation() {
+            const navToggle = document.getElementById('nav-toggle');
+            const navMenu = document.getElementById('nav-menu');
+            
+            navToggle.addEventListener('click', function() {
+                navMenu.classList.toggle('active');
+                navToggle.classList.toggle('active');
             });
+            
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    navMenu.classList.remove('active');
+                    navToggle.classList.remove('active');
+                    
+                    // Mettre à jour la classe active
+                    navLinks.forEach(l => l.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+            
+            // Navigation active au scroll
+            window.addEventListener('scroll', function() {
+                const sections = document.querySelectorAll('section');
+                const navLinks = document.querySelectorAll('.nav-link');
+                
+                let current = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    if (pageYOffset >= sectionTop - 100) {
+                        current = section.getAttribute('id');
+                    }
+                });
+                
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === '#' + current) {
+                        link.classList.add('active');
+                    }
+                });
+            });
+        }
 
-            // Ouvrir le modal d'image
-            const openImageModal = (item) => {
-                setSelectedImage(item);
-                setModalOpen(true);
+        // === NOTIFICATIONS ===
+        function initNotifications() {
+            const notificationBell = document.getElementById('notification-bell');
+            const notificationDropdown = document.getElementById('notification-dropdown');
+            
+            notificationBell.addEventListener('click', function(e) {
+                e.stopPropagation();
+                notificationDropdown.classList.toggle('active');
+            });
+            
+            // Fermer le dropdown en cliquant à l'extérieur
+            document.addEventListener('click', function() {
+                notificationDropdown.classList.remove('active');
+            });
+        }
+
+        // === CALENDRIER ===
+        function generateCalendar() {
+            const calendarGrid = document.getElementById('calendar-grid');
+            const today = new Date();
+            const currentMonth = today.getMonth();
+            const currentYear = today.getFullYear();
+            
+            // Obtenir le premier jour du mois et le nombre de jours
+            const firstDay = new Date(currentYear, currentMonth, 1).getDay();
+            const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+            
+            // Vider le calendrier existant
+            calendarGrid.innerHTML = '';
+            
+            // Ajouter les en-têtes des jours
+            const dayNames = ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'];
+            dayNames.forEach(day => {
+                const dayElement = document.createElement('div');
+                dayElement.className = 'calendar-day weekend';
+                dayElement.innerHTML = `<div class="date">${day}</div>`;
+                calendarGrid.appendChild(dayElement);
+            });
+            
+            // Ajouter des cellules vides pour les jours avant le premier jour du mois
+            for (let i = 0; i < firstDay; i++) {
+                const emptyDay = document.createElement('div');
+                emptyDay.className = 'calendar-day';
+                calendarGrid.appendChild(emptyDay);
+            }
+            
+            // Ajouter les jours du mois
+            for (let day = 1; day <= daysInMonth; day++) {
+                const dayElement = document.createElement('div');
+                const isToday = day === today.getDate() && currentMonth === today.getMonth() && currentYear === today.getFullYear();
+                const isSunday = (firstDay + day - 1) % 7 === 0;
+                
+                dayElement.className = 'calendar-day';
+                if (isToday) dayElement.classList.add('today');
+                if (isSunday) {
+                    dayElement.classList.add('weekend');
+                    dayElement.innerHTML = `
+                        <div class="date">${day}</div>
+                        <div class="calendar-event">Réunion ASHILAC - 15h</div>
+                    `;
+                } else {
+                    dayElement.innerHTML = `<div class="date">${day}</div>`;
+                }
+                
+                calendarGrid.appendChild(dayElement);
+            }
+        }
+
+        // === RENDU DES SECTIONS ===
+        function renderEvents() {
+            const container = document.querySelector('.events-grid');
+            container.innerHTML = appData.events.map(event => `
+                <div class="event-card">
+                    <div class="event-image">
+                        <img src="${event.image}" alt="${event.title}" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZTllY2VmIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxOCIgZmlsbD0iIzZjNzU3ZCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkltYWdlIEV2w6luZW1lbnQ8L3RleHQ+PC9zdmc+'">
+                        <div class="event-date">
+                            <span class="day">${event.date.day}</span>
+                            <span class="month">${event.date.month}</span>
+                        </div>
+                    </div>
+                    <div class="event-info">
+                        <h3>${event.title}</h3>
+                        <p>${event.description}</p>
+                        <div class="event-meta">
+                            <span><i class="fas fa-map-marker-alt"></i> ${event.location}</span>
+                            <span><i class="fas fa-clock"></i> ${event.time}</span>
+                        </div>
+                        <div class="event-actions">
+                            <button class="btn-outline" onclick="addToCalendar('${event.title}')">Ajouter au calendrier</button>
+                            <button class="btn-primary" onclick="showEventDetails('${event.title}')">Détails</button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderCommunity() {
+            const container = document.querySelector('.community-grid');
+            container.innerHTML = appData.community.map(item => `
+                <div class="community-card">
+                    <div class="community-icon">
+                        <i class="fas fa-${item.icon}"></i>
+                    </div>
+                    <h3>${item.title}</h3>
+                    <p>${item.description}</p>
+                    <div style="display: flex; justify-content: space-between; margin: 1.5rem 0; font-size: 0.9rem; color: var(--text-light);">
+                        ${item.stats.map(stat => `
+                            <span><i class="fas fa-${stat.icon}"></i> ${stat.text}</span>
+                        `).join('')}
+                    </div>
+                    <a href="#" class="btn-outline">En savoir plus</a>
+                </div>
+            `).join('');
+        }
+
+        function renderFormation() {
+            const container = document.querySelector('.formation-grid');
+            container.innerHTML = appData.formation.map(item => `
+                <div class="formation-card">
+                    <div class="formation-icon">
+                        <i class="fas fa-${item.icon}"></i>
+                    </div>
+                    <h3>${item.title}</h3>
+                    <p>${item.description}</p>
+                    <ul style="text-align: left; margin: 1.5rem 0; padding-left: 1.5rem;">
+                        ${item.items.map(listItem => `<li>${listItem}</li>`).join('')}
+                    </ul>
+                    <div style="display: flex; justify-content: space-between; margin: 1.5rem 0; font-size: 0.9rem; color: var(--text-light);">
+                        ${item.meta.map(meta => `
+                            <span><i class="fas fa-${meta.icon}"></i> ${meta.text}</span>
+                        `).join('')}
+                    </div>
+                    <a href="#" class="btn-outline">En savoir plus</a>
+                </div>
+            `).join('');
+        }
+
+        function renderYouth() {
+            const container = document.querySelector('.youth-grid');
+            container.innerHTML = appData.youth.map(item => `
+                <div class="youth-card">
+                    <div class="youth-icon">
+                        <i class="fas fa-${item.icon}"></i>
+                    </div>
+                    <h3>${item.title}</h3>
+                    <p>${item.description}</p>
+                    <a href="#" class="btn-outline">En savoir plus <i class="fas fa-arrow-right"></i></a>
+                </div>
+            `).join('');
+
+            const statsContainer = document.querySelector('.youth-stats');
+            statsContainer.innerHTML = appData.youthStats.map(stat => `
+                <div class="stat">
+                    <span class="stat-number">${stat.number}</span>
+                    <span class="stat-label">${stat.label}</span>
+                </div>
+            `).join('');
+        }
+
+        function renderSupport() {
+            const container = document.querySelector('.support-grid');
+            container.innerHTML = appData.support.map(item => `
+                <div class="support-card">
+                    <div class="support-icon">
+                        <i class="fas fa-${item.icon}"></i>
+                    </div>
+                    <h3>${item.title}</h3>
+                    <p>${item.description}</p>
+                    ${item.amounts ? `
+                        <div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 0.5rem; margin: 1.5rem 0;">
+                            ${item.amounts.map(amount => `
+                                <button class="amount-btn" style="padding: 8px 16px; background-color: #f8f9fa; border: 1px solid #dee2e6; border-radius: var(--border-radius-sm); cursor: pointer; transition: var(--transition);">${amount}</button>
+                            `).join('')}
+                        </div>
+                    ` : ''}
+                    ${item.areas ? `
+                        <div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 0.5rem; margin: 1.5rem 0;">
+                            ${item.areas.map(area => `
+                                <span style="padding: 5px 10px; background-color: rgba(26, 71, 42, 0.1); color: var(--primary-color); border-radius: 30px; font-size: 0.9rem;">${area}</span>
+                            `).join('')}
+                        </div>
+                    ` : ''}
+                    ${item.stats ? `
+                        <div style="display: flex; justify-content: space-between; margin: 1.5rem 0; font-size: 0.9rem; color: var(--text-light);">
+                            ${item.stats.map(stat => `
+                                <span><i class="fas fa-${stat.icon}"></i> ${stat.text}</span>
+                            `).join('')}
+                        </div>
+                    ` : ''}
+                    ${item.link ? `
+                        <a href="${item.link}" class="btn-primary" target="_blank">Participer</a>
+                    ` : `
+                        <a href="#" class="btn-primary">Participer</a>
+                    `}
+                </div>
+            `).join('');
+        }
+
+        function renderGallery() {
+            const container = document.getElementById('gallery-container');
+            container.innerHTML = appData.gallery.map(item => `
+                <div class="gallery-item" data-category="${item.category}">
+                    <img src="${item.image}" alt="${item.title}" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjI1MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZTllY2VmIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxOCIgZmlsbD0iIzZjNzU3ZCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkdhbGxlcmllIEFydDwvdGV4dD48L3N2Zz4='">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3>${item.title}</h3>
+                            <p>Artiste: ${item.artist}</p>
+                            <div class="gallery-actions" style="display: flex; gap: 0.5rem;">
+                                <button class="btn-icon" style="display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 50%; background-color: rgba(0, 0, 0, 0.05); border: none; color: white; cursor: pointer; transition: var(--transition);"><i class="far fa-heart"></i></button>
+                                <button class="btn-icon" onclick="openModal('${item.title}', '${item.artist}', '${item.image}')" style="display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 50%; background-color: rgba(0, 0, 0, 0.05); border: none; color: white; cursor: pointer; transition: var(--transition);"><i class="fas fa-expand"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+
+            // Filtrage de la galerie
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const filter = this.getAttribute('data-filter');
+                    
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    const items = document.querySelectorAll('.gallery-item');
+                    items.forEach(item => {
+                        if (filter === 'all' || item.getAttribute('data-category') === filter) {
+                            item.style.display = 'block';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                });
+            });
+        }
+
+        // === CAROUSEL ===
+        function initCarousel() {
+            let currentSlide = 0;
+            const slides = document.querySelectorAll('.carousel-item');
+            const indicators = document.querySelectorAll('.carousel-indicator');
+            
+            window.nextSlide = function() {
+                currentSlide = (currentSlide + 1) % slides.length;
+                updateCarousel();
             };
-
-            // Fermer le modal
-            const closeModal = () => {
-                setModalOpen(false);
-                setSelectedImage(null);
+            
+            window.prevSlide = function() {
+                currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+                updateCarousel();
             };
-
-            // Gestion de l'ajout au calendrier
-            const handleAddToCalendar = (eventTitle) => {
-                showToast(`"${eventTitle}" a été ajouté à votre calendrier!`);
+            
+            window.goToSlide = function(index) {
+                currentSlide = index;
+                updateCarousel();
             };
+            
+            function updateCarousel() {
+                const carouselInner = document.querySelector('.carousel-inner');
+                carouselInner.style.transform = `translateX(-${currentSlide * 100}%)`;
+                
+                slides.forEach((slide, index) => {
+                    slide.classList.toggle('active', index === currentSlide);
+                });
+                
+                indicators.forEach((indicator, index) => {
+                    indicator.classList.toggle('active', index === currentSlide);
+                });
+            }
+            
+            // Défilement automatique
+            setInterval(nextSlide, 5000);
+        }
 
-            return (
-                <div className="App">
-                    {/* Navigation */}
-                    <Navbar 
-                        activeSection={activeSection} 
-                        mobileMenuOpen={mobileMenuOpen}
-                        setMobileMenuOpen={setMobileMenuOpen}
-                    />
-                    
-                    {/* Sections principales */}
-                    <HeroSection />
-                    
-                    <EventsSection 
-                        events={appData.events}
-                        onAddToCalendar={handleAddToCalendar}
-                    />
-                    
-                    <CommunitySection communityStats={appData.communityStats} />
-                    
-                    <GallerySection 
-                        galleryItems={filteredGalleryItems}
-                        galleryFilter={galleryFilter}
-                        setGalleryFilter={setGalleryFilter}
-                        searchTerm={searchTerm}
-                        setSearchTerm={setSearchTerm}
-                        onImageClick={openImageModal}
-                    />
-                    
-                    <FormationSection />
-                    
-                    <YouthSection youthStats={appData.youthStats} />
-                    
-                    <SupportSection />
-                    
-                    <Footer />
-                    
-                    {/* Modal d'image */}
-                    <ImageModal 
-                        isOpen={modalOpen}
-                        image={selectedImage}
-                        onClose={closeModal}
-                    />
-                    
-                    {/* Notification Toast */}
-                    <Toast 
-                        show={toast.show}
-                        message={toast.message}
-                    />
+        // === FORMULAIRES ===
+        function initForms() {
+            // Formulaire de contact
+            const contactForm = document.getElementById('contact-form');
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const formData = new FormData(this);
+                const messageDiv = document.getElementById('contact-message');
+                
+                // Simulation d'envoi
+                messageDiv.className = 'message success';
+                messageDiv.textContent = 'Message envoyé avec succès! Nous vous répondrons bientôt.';
+                
+                // Réinitialiser le formulaire
+                this.reset();
+                
+                // Afficher toast
+                showToast('Message envoyé avec succès!');
+            });
+            
+            // Formulaire newsletter
+            const newsletterForm = document.getElementById('newsletter-form');
+            newsletterForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const messageDiv = document.getElementById('newsletter-message');
+                
+                // Simulation d'inscription
+                messageDiv.className = 'message success';
+                messageDiv.textContent = 'Merci pour votre inscription à notre newsletter!';
+                
+                // Réinitialiser le formulaire
+                this.reset();
+                
+                // Afficher toast
+                showToast('Inscription à la newsletter réussie!');
+            });
+        }
+
+        // === GEOLOCALISATION ===
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    showPosition,
+                    showError,
+                    {
+                        enableHighAccuracy: true,
+                        timeout: 5000,
+                        maximumAge: 0
+                    }
+                );
+            } else {
+                document.getElementById("location-result").innerHTML = 
+                    "<p style='color: white;'>La géolocalisation n'est pas supportée par ce navigateur.</p>";
+            }
+        }
+
+        function showPosition(position) {
+            const lat = position.coords.latitude;
+            const lng = position.coords.longitude;
+            
+            // Coordonnées approximatives de Bashila, Lac Moero (à ajuster)
+            const bashilaLat = -8.6250;
+            const bashilaLng = 28.2500;
+            
+            const distance = calculateDistance(lat, lng, bashilaLat, bashilaLng);
+            
+            document.getElementById("location-result").innerHTML = `
+                <div style="background: rgba(255,255,255,0.2); padding: 1rem; border-radius: var(--border-radius); margin-top: 1rem;">
+                    <p style="color: white; margin-bottom: 0.5rem;"><i class="fas fa-check-circle"></i> Localisation réussie!</p>
+                    <p style="color: white; font-size: 0.9rem; opacity: 0.9;">
+                        Vous êtes à environ <strong>${Math.round(distance)} km</strong> de ASHILAC à Bashila, Lac Moero
+                    </p>
+                    <p style="color: white; font-size: 0.8rem; opacity: 0.8; margin-top: 0.5rem;">
+                        <i class="fas fa-info-circle"></i> Distance calculée depuis votre position actuelle
+                    </p>
                 </div>
-            );
+            `;
+            
+            showToast('Localisation réussie! Distance calculée.');
         }
 
-        // Composant Navigation
-        function Navbar({ activeSection, mobileMenuOpen, setMobileMenuOpen }) {
-            const toggleMobileMenu = () => {
-                setMobileMenuOpen(!mobileMenuOpen);
-            };
-
-            return (
-                <nav className="navbar">
-                    <div className="nav-container">
-                        <div className="nav-logo">
-                            <a href="#accueil">
-                                <img src="images/logo_ashilac_1.png" alt="Logo ASHILAC" className="logo" />
-                                <span>ASHILAC</span>
-                            </a>
-                        </div>
-                        <div className={`nav-menu ${mobileMenuOpen ? 'active' : ''}`} id="nav-menu">
-                            <a href="#accueil" className={`nav-link ${activeSection === 'accueil' ? 'active' : ''}`}>Accueil</a>
-                            <a href="#evenements" className={`nav-link ${activeSection === 'evenements' ? 'active' : ''}`}>Événements</a>
-                            <a href="#communaute" className={`nav-link ${activeSection === 'communaute' ? 'active' : ''}`}>Communauté</a>
-                            <a href="#galerie" className={`nav-link ${activeSection === 'galerie' ? 'active' : ''}`}>Galerie</a>
-                            <a href="#formation" className={`nav-link ${activeSection === 'formation' ? 'active' : ''}`}>Formation</a>
-                            <a href="#jeunesse" className={`nav-link ${activeSection === 'jeunesse' ? 'active' : ''}`}>Jeunesse</a>
-                            <a href="#soutien" className={`nav-link ${activeSection === 'soutien' ? 'active' : ''}`}>Soutien</a>
-                            <div className="nav-right">
-                                <a href="#" className="btn-login"><i className="fas fa-user"></i> Connexion</a>
-                                <a href="#" className="btn-register">S'inscrire</a>
-                            </div>
-                        </div>
-                        <div className={`nav-toggle ${mobileMenuOpen ? 'active' : ''}`} id="nav-toggle" onClick={toggleMobileMenu}>
-                            <span className="bar"></span>
-                            <span className="bar"></span>
-                            <span className="bar"></span>
-                        </div>
-                    </div>
-                </nav>
-            );
+        function showError(error) {
+            let message = "Erreur inconnue lors de la géolocalisation";
+            
+            switch(error.code) {
+                case error.PERMISSION_DENIED:
+                    message = "Localisation refusée par l'utilisateur";
+                    break;
+                case error.POSITION_UNAVAILABLE:
+                    message = "Information de localisation indisponible";
+                    break;
+                case error.TIMEOUT:
+                    message = "La demande de localisation a expiré";
+                    break;
+            }
+            
+            document.getElementById("location-result").innerHTML = 
+                `<p style="color: #ff6b6b;">${message}</p>`;
         }
 
-        // Composant Hero Section
-        function HeroSection() {
-            return (
-                <section id="accueil" className="hero">
-                    <div className="hero-background">
-                        <div className="hero-overlay"></div>
-                    </div>
-                    <div className="hero-content">
-                        <div className="hero-text">
-                            <h1 className="hero-title">ASHILAC</h1>
-                            <h2 className="hero-subtitle">Association Socio-Culturelle de Bashila du Lac Moero</h2>
-                            <p className="hero-description">Valoriser la culture locale, connecter la communauté et engager les jeunes autour des arts et traditions du Lac Moero.</p>
-                            <div className="hero-buttons">
-                                <a href="#evenements" className="btn-primary">Découvrir nos événements</a>
-                                <a href="#communaute" className="btn-secondary">Rejoindre la communauté</a>
-                            </div>
-                        </div>
-                        <div className="hero-image">
-                            <img src="images/image1.jpg" alt="Culture du Lac Moero" />
-                        </div>
-                    </div>
-                    <div className="scroll-indicator">
-                        <span>Scroll</span>
-                        <div className="scroll-line"></div>
-                    </div>
-                </section>
-            );
+        function calculateDistance(lat1, lon1, lat2, lon2) {
+            const R = 6371; // Rayon de la Terre en km
+            const dLat = (lat2 - lat1) * Math.PI / 180;
+            const dLon = (lon2 - lon1) * Math.PI / 180;
+            const a = 
+                Math.sin(dLat/2) * Math.sin(dLat/2) +
+                Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * 
+                Math.sin(dLon/2) * Math.sin(dLon/2);
+            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+            return R * c;
         }
 
-        // Composant Section Événements
-        function EventsSection({ events, onAddToCalendar }) {
-            return (
-                <section id="evenements" className="section">
-                    <div className="container">
-                        <div className="section-header">
-                            <h2 className="section-title">Événements & Culture</h2>
-                            <p className="section-subtitle">Découvrez notre programmation culturelle riche et variée</p>
-                        </div>
-                        <div className="events-grid">
-                            {events.map(event => (
-                                <EventCard 
-                                    key={event.id}
-                                    event={event}
-                                    onAddToCalendar={onAddToCalendar}
-                                />
-                            ))}
-                        </div>
-                        <div className="text-center">
-                            <a href="#" className="btn-primary">Voir tous les événements <i className="fas fa-arrow-right"></i></a>
-                        </div>
-                    </div>
-                </section>
-            );
+        // === FONCTIONNALITÉS ===
+        function addToCalendar(eventTitle) {
+            showToast(`"${eventTitle}" a été ajouté à votre calendrier!`);
         }
 
-        // Composant Carte d'événement
-        function EventCard({ event, onAddToCalendar }) {
-            return (
-                <div className="event-card">
-                    <div className="event-image">
-                        <img src={event.image} alt={event.title} />
-                        <div className="event-date">
-                            <span className="day">{event.date.day}</span>
-                            <span className="month">{event.date.month}</span>
-                        </div>
-                    </div>
-                    <div className="event-info">
-                        <h3>{event.title}</h3>
-                        <p>{event.description}</p>
-                        <div className="event-meta">
-                            <span><i className="fas fa-map-marker-alt"></i> {event.location}</span>
-                            <span><i className="fas fa-clock"></i> {event.time}</span>
-                        </div>
-                        <div className="event-actions">
-                            <button 
-                                className="btn-outline calendar-btn"
-                                onClick={() => onAddToCalendar(event.title)}
-                            >
-                                Ajouter à mon calendrier
-                            </button>
-                            <button className="btn-icon"><i className="fas fa-share-alt"></i></button>
-                        </div>
-                    </div>
-                </div>
-            );
+        function showEventDetails(eventTitle) {
+            showToast(`Détails de l'événement "${eventTitle}" affichés!`);
+            // Dans une implémentation réelle, cela ouvrirait un modal avec les détails complets
         }
 
-        // Composant Section Communauté
-        function CommunitySection({ communityStats }) {
-            return (
-                <section id="communaute" className="section bg-light">
-                    <div className="container">
-                        <div className="section-header">
-                            <h2 className="section-title">Communauté & Échanges</h2>
-                            <p className="section-subtitle">Rejoignez notre communauté dynamique et participez aux échanges</p>
-                        </div>
-                        <div className="community-grid">
-                            <div className="community-card">
-                                <div className="community-icon">
-                                    <i className="fas fa-comments"></i>
-                                </div>
-                                <h3>Forum de Discussion</h3>
-                                <p>Participez aux conversations thématiques sur la culture, l'art et les initiatives locales.</p>
-                                <div className="community-stats">
-                                    <span><i className="fas fa-users"></i> {communityStats.members} membres actifs</span>
-                                    <span><i className="fas fa-comment"></i> {communityStats.discussions} discussions</span>
-                                </div>
-                                <a href="#" className="btn-outline">Accéder au forum</a>
-                            </div>
-                            
-                            <div className="community-card">
-                                <div className="community-icon">
-                                    <i className="fas fa-users"></i>
-                                </div>
-                                <h3>Chat en Temps Réel</h3>
-                                <p>Échangez en direct avec d'autres membres de la communauté ASHILAC.</p>
-                                <div className="community-stats">
-                                    <span><i className="fas fa-user-clock"></i> {communityStats.online} en ligne</span>
-                                    <span><i className="fas fa-comment-dots"></i> Chat actif</span>
-                                </div>
-                                <a href="#" className="btn-outline">Rejoindre le chat</a>
-                            </div>
-                            
-                            <div className="community-card">
-                                <div className="community-icon">
-                                    <i className="fas fa-chart-pie"></i>
-                                </div>
-                                <h3>Sondages Communautaires</h3>
-                                <p>Donnez votre avis sur les projets et événements futurs d'ASHILAC.</p>
-                                <div className="community-stats">
-                                    <span><i className="fas fa-poll"></i> {communityStats.polls} sondages actifs</span>
-                                    <span><i className="fas fa-vote-yea"></i> {communityStats.participation}% participation</span>
-                                </div>
-                                <a href="#" className="btn-outline">Participer aux sondages</a>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-            );
+        function openModal(title, artist, image) {
+            const modal = document.getElementById('image-modal');
+            const modalImage = document.getElementById('modal-image');
+            const modalTitle = document.getElementById('modal-title');
+            const modalArtist = document.getElementById('modal-artist');
+            
+            modalImage.src = image;
+            modalTitle.textContent = title;
+            modalArtist.textContent = `Artiste: ${artist}`;
+            
+            modal.classList.add('active');
         }
 
-        // Composant Section Galerie
-        function GallerySection({ 
-            galleryItems, 
-            galleryFilter, 
-            setGalleryFilter, 
-            searchTerm, 
-            setSearchTerm,
-            onImageClick 
-        }) {
-            const filters = [
-                { key: 'all', label: 'Tous' },
-                { key: 'peinture', label: 'Peinture' },
-                { key: 'sculpture', label: 'Sculpture' },
-                { key: 'photo', label: 'Photographie' },
-                { key: 'artisanat', label: 'Artisanat' }
-            ];
-
-            return (
-                <section id="galerie" className="section">
-                    <div className="container">
-                        <div className="section-header">
-                            <h2 className="section-title">Galerie d'Art Virtuelle</h2>
-                            <p className="section-subtitle">Découvrez les talents artistiques de notre communauté</p>
-                        </div>
-                        <div className="gallery-controls">
-                            <div className="gallery-filters">
-                                {filters.map(filter => (
-                                    <button 
-                                        key={filter.key}
-                                        className={`filter-btn ${galleryFilter === filter.key ? 'active' : ''}`}
-                                        onClick={() => setGalleryFilter(filter.key)}
-                                    >
-                                        {filter.label}
-                                    </button>
-                                ))}
-                            </div>
-                            <div className="gallery-search">
-                                <input 
-                                    type="text" 
-                                    placeholder="Rechercher une œuvre..." 
-                                    className="search-input"
-                                    value={searchTerm}
-                                    onChange={(e) => setSearchTerm(e.target.value)}
-                                />
-                                <button className="search-btn"><i className="fas fa-search"></i></button>
-                            </div>
-                        </div>
-                        <div className="gallery-grid">
-                            {galleryItems.map((item, index) => (
-                                <GalleryItem 
-                                    key={item.id}
-                                    item={item}
-                                    index={index}
-                                    onClick={() => onImageClick(item)}
-                                />
-                            ))}
-                        </div>
-                        <div className="text-center">
-                            <a href="#" className="btn-primary">Voir toute la galerie <i className="fas fa-arrow-right"></i></a>
-                        </div>
-                    </div>
-                </section>
-            );
+        function closeModal() {
+            document.getElementById('image-modal').classList.remove('active');
         }
 
-        // Composant Item de Galerie
-        function GalleryItem({ item, index, onClick }) {
-            return (
-                <div 
-                    className="gallery-item" 
-                    data-category={item.category}
-                    style={{ '--i': index }}
-                    onClick={onClick}
-                >
-                    <img src={item.image} alt={item.title} />
-                    <div className="gallery-overlay">
-                        <div className="gallery-info">
-                            <h3>{item.title}</h3>
-                            <p>Artiste: {item.artist}</p>
-                            <div className="gallery-actions">
-                                <button className="btn-icon"><i className="far fa-heart"></i></button>
-                                <button className="btn-icon"><i className="fas fa-expand"></i></button>
-                                <button className="btn-icon"><i className="fas fa-share-alt"></i></button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            );
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('active');
+            
+            setTimeout(() => {
+                toast.classList.remove('active');
+            }, 3000);
         }
 
-        // Composant Section Formation
-        function FormationSection() {
-            return (
-                <section id="formation" className="section bg-light">
-                    <div className="container">
-                        <div className="section-header">
-                            <h2 className="section-title">Création & Formation</h2>
-                            <p className="section-subtitle">Développez vos talents avec nos programmes de formation</p>
-                        </div>
-                        <div className="formation-grid">
-                            <div className="formation-card">
-                                <div className="formation-icon">
-                                    <i className="fas fa-music"></i>
-                                </div>
-                                <h3>Ateliers Musicaux</h3>
-                                <p>Apprenez à créer de la musique avec des instruments traditionnels et modernes.</p>
-                                <ul>
-                                    <li>Instruments traditionnels</li>
-                                    <li>Production musicale</li>
-                                    <li>Composition</li>
-                                </ul>
-                                <div className="formation-meta">
-                                    <span><i className="fas fa-clock"></i> 12 semaines</span>
-                                    <span><i className="fas fa-user-graduate"></i> Niveau débutant</span>
-                                </div>
-                                <a href="#" className="btn-outline">En savoir plus</a>
-                            </div>
-                            
-                            <div className="formation-card">
-                                <div className="formation-icon">
-                                    <i className="fas fa-paint-brush"></i>
-                                </div>
-                                <h3>Arts Visuels</h3>
-                                <p>Développez vos compétences en peinture, dessin et arts numériques.</p>
-                                <ul>
-                                    <li>Techniques de dessin</li>
-                                    <li>Peinture traditionnelle</li>
-                                    <li>Art numérique</li>
-                                </ul>
-                                <div className="formation-meta">
-                                    <span><i className="fas fa-clock"></i> 8 semaines</span>
-                                    <span><i className="fas fa-user-graduate"></i> Tous niveaux</span>
-                                </div>
-                                <a href="#" className="btn-outline">En savoir plus</a>
-                            </div>
-                            
-                            <div className="formation-card">
-                                <div className="formation-icon">
-                                    <i className="fas fa-video"></i>
-                                </div>
-                                <h3>Production Vidéo</h3>
-                                <p>Maîtrisez les techniques de réalisation et montage vidéo.</p>
-                                <ul>
-                                    <li>Réalisation</li>
-                                    <li>Montage vidéo</li>
-                                    <li>Post-production</li>
-                                </ul>
-                                <div className="formation-meta">
-                                    <span><i className="fas fa-clock"></i> 10 semaines</span>
-                                    <span><i className="fas fa-user-graduate"></i> Niveau intermédiaire</span>
-                                </div>
-                                <a href="#" className="btn-outline">En savoir plus</a>
-                            </div>
-                        </div>
-                        
-                        <div className="challenge-section">
-                            <div className="challenge-header">
-                                <h3>Challenges Créatifs Mensuels</h3>
-                                <p>Participez à nos challenges créatifs et faites voter la communauté pour vos œuvres !</p>
-                            </div>
-                            <div className="challenge-info">
-                                <div className="challenge-current">
-                                    <div className="challenge-badge">En cours</div>
-                                    <h4>Challenge du mois : "Le Lac dans tous ses états"</h4>
-                                    <p>Date limite : 30 octobre 2023</p>
-                                    <div className="challenge-progress">
-                                        <div className="progress-bar">
-                                            <div className="progress-fill" style={{width: '65%'}}></div>
-                                        </div>
-                                        <span>65% des œuvres reçues</span>
-                                    </div>
-                                    <a href="#" className="btn-primary">Participer</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-            );
-        }
-
-        // Composant Section Jeunesse
-        function YouthSection({ youthStats }) {
-            return (
-                <section id="jeunesse" className="section">
-                    <div className="container">
-                        <div className="section-header">
-                            <h2 className="section-title">Programme Jeunesse</h2>
-                            <p className="section-subtitle">Investir dans la jeunesse, c'est construire l'avenir</p>
-                        </div>
-                        <div className="youth-grid">
-                            <div className="youth-card">
-                                <div className="youth-icon">
-                                    <i className="fas fa-hands-helping"></i>
-                                </div>
-                                <h3>Mentorat Artistique</h3>
-                                <p>Des artistes expérimentés accompagnent les jeunes talents dans leur développement créatif.</p>
-                                <a href="#" className="youth-link">En savoir plus <i className="fas fa-arrow-right"></i></a>
-                            </div>
-                            
-                            <div className="youth-card">
-                                <div className="youth-icon">
-                                    <i className="fas fa-trophy"></i>
-                                </div>
-                                <h3>Concours Thématiques</h3>
-                                <p>Participez à nos concours et faites évaluer votre travail par un jury communautaire.</p>
-                                <a href="#" className="youth-link">En savoir plus <i className="fas fa-arrow-right"></i></a>
-                            </div>
-                            
-                            <div className="youth-card">
-                                <div className="youth-icon">
-                                    <i className="fas fa-handshake"></i>
-                                </div>
-                                <h3>Partenariats Éducatifs</h3>
-                                <p>Collaborations avec les écoles locales pour intégrer l'art dans l'éducation.</p>
-                                <a href="#" className="youth-link">En savoir plus <i className="fas fa-arrow-right"></i></a>
-                            </div>
-                        </div>
-                        
-                        <div className="youth-stats">
-                            <div className="stat">
-                                <span className="stat-number">{youthStats.youth}+</span>
-                                <span className="stat-label">Jeunes impliqués</span>
-                            </div>
-                            <div className="stat">
-                                <span className="stat-number">{youthStats.mentors}</span>
-                                <span className="stat-label">Mentors actifs</span>
-                            </div>
-                            <div className="stat">
-                                <span className="stat-number">{youthStats.schools}</span>
-                                <span className="stat-label">Écoles partenaires</span>
-                            </div>
-                            <div className="stat">
-                                <span className="stat-number">{youthStats.contests}</span>
-                                <span className="stat-label">Concours annuels</span>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-            );
-        }
-
-        // Composant Section Soutien
-        function SupportSection() {
-            return (
-                <section id="soutien" className="section bg-light">
-                    <div className="container">
-                        <div className="section-header">
-                            <h2 className="section-title">Soutien & Engagement</h2>
-                            <p className="section-subtitle">Contribuez à la pérennité de nos actions culturelles</p>
-                        </div>
-                        <div className="support-grid">
-                            <div className="support-card">
-                                <div className="support-icon">
-                                    <i className="fas fa-hand-holding-heart"></i>
-                                </div>
-                                <h3>Faire un Don</h3>
-                                <p>Soutenez nos activités culturelles et éducatives avec un don.</p>
-                                <div className="support-amounts">
-                                    <button className="amount-btn">10€</button>
-                                    <button className="amount-btn">25€</button>
-                                    <button className="amount-btn">50€</button>
-                                    <button className="amount-btn">Autre</button>
-                                </div>
-                                <a href="#" className="btn-primary">Faire un don</a>
-                            </div>
-                            
-                            <div className="support-card">
-                                <div className="support-icon">
-                                    <i className="fas fa-hands"></i>
-                                </div>
-                                <h3>Devenir Bénévole</h3>
-                                <p>Rejoignez notre équipe de bénévoles et contribuez à nos projets.</p>
-                                <div className="support-areas">
-                                    <span>Animation</span>
-                                    <span>Enseignement</span>
-                                    <span>Événements</span>
-                                </div>
-                                <a href="#" className="btn-primary">Devenir bénévole</a>
-                            </div>
-                            
-                            <div className="support-card">
-                                <div className="support-icon">
-                                    <i className="fas fa-lightbulb"></i>
-                                </div>
-                                <h3>Proposer une Idée</h3>
-                                <p>Partagez vos idées pour de nouveaux projets ou améliorations.</p>
-                                <div className="support-stats">
-                                    <span><i className="fas fa-lightbulb"></i> 42 idées proposées</span>
-                                    <span><i className="fas fa-check-circle"></i> 15 mises en œuvre</span>
-                                </div>
-                                <a href="#" className="btn-primary">Proposer une idée</a>
-                            </div>
-                        </div>
-                        
-                        <div className="contact-info">
-                            <div className="contact-card">
-                                <h3>Contactez-nous</h3>
-                                <div className="contact-details">
-                                    <div className="contact-item">
-                                        <i className="fas fa-phone"></i>
-                                        <div>
-                                            <span>+243 971 300 107</span>
-                                            <small>Lun - Ven, 9h - 17h</small>
-                                        </div>
-                                    </div>
-                                    <div className="contact-item">
-                                        <i className="fas fa-envelope"></i>
-                                        <div>
-                                            <span>patientkiwala@gmail.com</span>
-                                            <small>Réponse sous 24h</small>
-                                        </div>
-                                    </div>
-                                    <div className="contact-item">
-                                        <i className="fas fa-map-marker-alt"></i>
-                                        <div>
-                                            <span>Bashila, Lac Moero</span>
-                                            <small>République Démocratique du Congo</small>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div className="responsible-card">
-                                <div className="responsible-image">
-                                    <img src="images/responsable.jpg" alt="Patient Kiwala Mwape" />
-                                </div>
-                                <div className="responsible-info">
-                                    <h4>Patient Kiwala Mwape</h4>
-                                    <p className="responsible-title">Sage Pèlerin & Responsable ASHILAC</p>
-                                    <p className="responsible-quote">"La culture est le ciment qui unit notre communauté et l'art, le langage universel qui nous élève."</p>
-                                    <div className="responsible-contact">
-                                        <a href="#" className="btn-icon"><i className="fab fa-whatsapp"></i></a>
-                                        <a href="#" className="btn-icon"><i className="fas fa-envelope"></i></a>
-                                        <a href="#" className="btn-icon"><i className="fab fa-linkedin"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-            );
-        }
-
-        // Composant Footer
-        function Footer() {
-            return (
-                <footer className="footer">
-                    <div className="container">
-                        <div className="footer-content">
-                            <div className="footer-section">
-                                <div className="footer-logo">
-                                    <img src="images/logo_ashilac_1.png" alt="Logo ASHILAC" />
-                                    <span>ASHILAC</span>
-                                </div>
-                                <p>Association Socio-Culturelle de Bashila du Lac Moero</p>
-                                <p>Valoriser la culture locale, connecter la communauté et engager les jeunes.</p>
-                                <div className="footer-social">
-                                    <a href="#"><i className="fab fa-facebook"></i></a>
-                                    <a href="#"><i className="fab fa-twitter"></i></a>
-                                    <a href="#"><i className="fab fa-instagram"></i></a>
-                                    <a href="#"><i className="fab fa-youtube"></i></a>
-                                    <a href="#"><i className="fab fa-whatsapp"></i></a>
-                                </div>
-                            </div>
-                            
-                            <div className="footer-section">
-                                <h3>Liens Rapides</h3>
-                                <ul>
-                                    <li><a href="#accueil">Accueil</a></li>
-                                    <li><a href="#evenements">Événements</a></li>
-                                    <li><a href="#galerie">Galerie</a></li>
-                                    <li><a href="#formation">Formation</a></li>
-                                    <li><a href="#jeunesse">Jeunesse</a></li>
-                                </ul>
-                            </div>
-                            
-                            <div className="footer-section">
-                                <h3>Ressources</h3>
-                                <ul>
-                                    <li><a href="#communaute">Communauté</a></li>
-                                    <li><a href="#soutien">Soutien</a></li>
-                                    <li><a href="#">FAQ</a></li>
-                                    <li><a href="#">Blog</a></li>
-                                    <li><a href="#">Mentions légales</a></li>
-                                </ul>
-                            </div>
-                            
-                            <div className="footer-section">
-                                <h3>Newsletter</h3>
-                                <p>Inscrivez-vous pour recevoir nos actualités</p>
-                                <form className="newsletter-form">
-                                    <input type="email" placeholder="Votre email" required />
-                                    <button type="submit"><i className="fas fa-paper-plane"></i></button>
-                                </form>
-                            </div>
-                        </div>
-                        
-                        <div className="footer-bottom">
-                            <p>&copy; 2023 ASHILAC. Tous droits réservés. | Conçu avec <i className="fas fa-heart"></i> par Patient Kiwala Mwape</p>
-                        </div>
-                    </div>
-                </footer>
-            );
-        }
-
-        // Composant Modal d'image
-        function ImageModal({ isOpen, image, onClose }) {
-            if (!isOpen || !image) return null;
-
-            return (
-                <div className={`modal ${isOpen ? 'active' : ''}`} onClick={onClose}>
-                    <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-                        <span className="close-modal" onClick={onClose}>&times;</span>
-                        <img src={image.image} alt={image.title} className="modal-image" />
-                        <div className="modal-info">
-                            <h3 className="modal-title">{image.title}</h3>
-                            <p className="modal-artist">Artiste: {image.artist}</p>
-                        </div>
-                    </div>
-                </div>
-            );
-        }
-
-        // Composant Toast
-        function Toast({ show, message }) {
-            return (
-                <div className={`toast ${show ? 'active' : ''}`}>
-                    {message}
-                </div>
-            );
-        }
-
-        // Rendu de l'application
-        ReactDOM.render(<App />, document.getElementById('root'));
+        // Fermer le modal en cliquant à l'extérieur
+        document.getElementById('image-modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
     </script>
 </body>
 </html>
