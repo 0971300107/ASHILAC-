@@ -929,6 +929,139 @@
             display: block;
         }
 
+        /* === MODALS === */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 1100;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            position: relative;
+            max-width: 800px;
+            width: 100%;
+            background-color: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.5rem;
+            color: white;
+            background-color: rgba(0, 0, 0, 0.5);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+            transition: var(--transition);
+        }
+
+        .close-modal:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .modal-header {
+            background: var(--gradient);
+            color: white;
+            padding: 1.5rem;
+        }
+
+        .modal-body {
+            padding: 2rem;
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            height: 0;
+            padding-bottom: 56.25%;
+            margin-bottom: 1.5rem;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: var(--border-radius-sm);
+        }
+
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .partner-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .partner-card {
+            background-color: #f8f9fa;
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .partner-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--box-shadow);
+        }
+
+        .partner-logo {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 1rem;
+        }
+
+        .contest-card {
+            background-color: #f8f9fa;
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .contest-card h4 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .contest-card p {
+            margin-bottom: 1rem;
+            color: var(--text-light);
+        }
+
         /* === FOOTER === */
         .footer {
             background-color: var(--dark-color);
@@ -1045,71 +1178,6 @@
             border-top: 1px solid rgba(255, 255, 255, 0.1);
             color: #adb5bd;
             font-size: 0.9rem;
-        }
-
-        .footer-bottom i {
-            color: #e74c3c;
-        }
-
-        /* === MODAL === */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
-            z-index: 1100;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .modal.active {
-            display: flex;
-        }
-
-        .modal-content {
-            position: relative;
-            max-width: 90%;
-            max-height: 90%;
-            background-color: white;
-            border-radius: var(--border-radius);
-            overflow: hidden;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-        }
-
-        .close-modal {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            font-size: 1.5rem;
-            color: white;
-            background-color: rgba(0, 0, 0, 0.5);
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            z-index: 10;
-            transition: var(--transition);
-        }
-
-        .close-modal:hover {
-            background-color: rgba(0, 0, 0, 0.8);
-        }
-
-        .modal-image {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-
-        .modal-info {
-            padding: 1.5rem;
-            background-color: white;
         }
 
         /* === TOAST === */
@@ -1264,6 +1332,14 @@
                 width: 250px;
                 right: -50px;
             }
+
+            .video-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .partner-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
         }
 
         @media (max-width: 576px) {
@@ -1357,7 +1433,7 @@
                 </div>
             </div>
             <div class="hero-image">
-                <img src="image1.jpg" alt="Culture du Lac Moero">
+                <img src="image1.jpg" alt="Culture du Lac Moero" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZTllY2VmIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxOCIgZmlsbD0iIzZjNzU3ZCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkFzaGlsYWMgLSBDdWx0dXJlIGR1IExhYyBNb2VybzwvdGV4dD48L3N2Zz4='">
             </div>
         </div>
     </section>
@@ -1397,21 +1473,21 @@
             <div class="carousel" id="main-carousel">
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <img src="image2.jpg" alt="Festival Culturel">
+                        <img src="image2.jpg" alt="Festival Culturel" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAwIiBoZWlnaHQ9IjUwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZTllY2VmIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIyNCIgZmlsbD0iIzZjNzU3ZCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkZlc3RpdmFsIEFubnVlbCBkZSBsYSBDdWx0dXJlPC90ZXh0Pjwvc3ZnPg=='">
                         <div class="carousel-caption">
                             <h3>Festival Annuel de la Culture</h3>
                             <p>Célébrons ensemble la richesse de notre patrimoine culturel</p>
                         </div>
                     </div>
                     <div class="carousel-item">
-                        <img src="image3.jpg" alt="Formation Jeunesse">
+                        <img src="image3.jpg" alt="Formation Jeunesse" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAwIiBoZWlnaHQ9IjUwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZTllY2VmIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIyNCIgZmlsbD0iIzZjNzU3ZCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkZvcm1hdGlvbiBkZXMgSmV1bmVzIEFydGlzdGVzPC90ZXh0Pjwvc3ZnPg=='">
                         <div class="carousel-caption">
                             <h3>Formation des Jeunes Artistes</h3>
                             <p>Investir dans la jeunesse pour préserver notre héritage</p>
                         </div>
                     </div>
                     <div class="carousel-item">
-                        <img src="image4.jpg" alt="Artisanat Local">
+                        <img src="image4.jpg" alt="Artisanat Local" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAwIiBoZWlnaHQ9IjUwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZTllY2VmIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIyNCIgZmlsbD0iIzZjNzU3ZCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkFydGlzYW5hdCBUcmFkaXRpb25uZWw8L3RleHQ+PC9zdmc+'">
                         <div class="carousel-caption">
                             <h3>Artisanat Traditionnel</h3>
                             <p>Préservation des techniques ancestrales</p>
@@ -1621,7 +1697,7 @@
                 
                 <div class="responsible-card" style="background-color: white; padding: 2.5rem; border-radius: var(--border-radius); box-shadow: var(--box-shadow); display: flex; gap: 1.5rem; align-items: center;">
                     <div class="responsible-image" style="width: 120px; height: 120px; border-radius: 50%; overflow: hidden; flex-shrink: 0;">
-                        <img src="patient-kiwala.jpg" alt="Patient Kiwala Mwape" style="width: 100%; height: 100%; object-fit: cover;">
+                        <img src="patient-kiwala.jpg" alt="Patient Kiwala Mwape" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIwIiBoZWlnaHQ9IjEyMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZTllY2VmIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzZjNzU3ZCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPlBhdGllbnQgS2l3YWxhPC90ZXh0Pjwvc3ZnPg=='">
                     </div>
                     <div class="responsible-info">
                         <h4>Patient Kiwala Mwape</h4>
@@ -1644,22 +1720,19 @@
             <div class="footer-content">
                 <div class="footer-section">
                     <div class="footer-logo">
-                        <img src="logo_ashilac_1.png" alt="Logo ASHILAC">
+                        <img src="logo_ashilac_1.png" alt="Logo ASHILAC" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0iI2U5ZWNlZiIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTQiIGZpbGw9IiM2Yzc1N2QiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGR5PSIuM2VtIj5BPC90ZXh0Pjwvc3ZnPg=='">
                         <span>ASHILAC</span>
                     </div>
-                    <p>Association Socio-Culturelle de Bashila du Lac Moero</p>
-                    <p>Valoriser la culture locale, connecter la communauté et engager les jeunes.</p>
+                    <p>Valoriser la culture locale, connecter la communauté et engager les jeunes autour des arts et traditions du Lac Moero.</p>
                     <div class="footer-social">
-                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
                         <a href="#"><i class="fab fa-twitter"></i></a>
                         <a href="#"><i class="fab fa-instagram"></i></a>
                         <a href="#"><i class="fab fa-youtube"></i></a>
-                        <a href="https://wa.me/243971300107" target="_blank"><i class="fab fa-whatsapp"></i></a>
                     </div>
                 </div>
-                
                 <div class="footer-section">
-                    <h3>Liens Rapides</h3>
+                    <h3>Liens rapides</h3>
                     <ul>
                         <li><a href="#accueil">Accueil</a></li>
                         <li><a href="#evenements">Événements</a></li>
@@ -1668,38 +1741,255 @@
                         <li><a href="#formation">Formation</a></li>
                     </ul>
                 </div>
-                
                 <div class="footer-section">
                     <h3>Contact</h3>
                     <ul>
-                        <li><i class="fas fa-phone"></i> +243 971 300 107</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Bashila, Lac Moero, RDC</li>
+                        <li><i class="fas fa-phone"></i> +243 97 130 0107</li>
                         <li><i class="fas fa-envelope"></i> patientkiwala@gmail.com</li>
-                        <li><i class="fas fa-map-marker-alt"></i> Bashila, Lac Moero</li>
-                        <li><i class="fab fa-whatsapp"></i> <a href="https://chat.whatsapp.com/FZr4Z14DFpSI3DDWyOLu3W?mode=wwt" style="color: #adb5bd; text-decoration: none;">Groupe WhatsApp</a></li>
                     </ul>
                 </div>
-                
                 <div class="footer-section">
                     <h3>Newsletter</h3>
                     <p>Inscrivez-vous pour recevoir nos actualités</p>
-                    <div class="message" id="newsletter-message"></div>
                     <form class="newsletter-form" id="newsletter-form">
-                        <input type="email" name="newsletter_email" placeholder="Votre email" required>
+                        <input type="email" placeholder="Votre email" required>
                         <button type="submit"><i class="fas fa-paper-plane"></i></button>
                     </form>
+                    <div class="message" id="newsletter-message"></div>
                 </div>
             </div>
-            
             <div class="footer-bottom">
-                <p>&copy; 2023 ASHILAC. Tous droits réservés. | Conçu avec <i class="fas fa-heart"></i> par Patient Kiwala Mwape</p>
+                <p>&copy; 2023 ASHILAC - Association Socio-Culturelle de Bashila du Lac Moero. Tous droits réservés.</p>
+                <p>Fait avec <i class="fas fa-heart"></i> pour la communauté</p>
             </div>
         </div>
     </footer>
 
-    <!-- Modal Image -->
+    <!-- Modals pour les fonctionnalités demandées -->
+    <!-- Modal pour Production Vidéo -->
+    <div class="modal" id="video-modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('video-modal')">&times;</span>
+            <div class="modal-header">
+                <h2>Vidéos sur la Culture Africaine</h2>
+                <p>Découvrez des contenus YouTube gratuits sur la richesse culturelle africaine</p>
+            </div>
+            <div class="modal-body">
+                <div class="video-grid" id="video-container">
+                    <!-- Les vidéos seront ajoutées par JavaScript -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal pour Mentorat Artistique -->
+    <div class="modal" id="mentorat-modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('mentorat-modal')">&times;</span>
+            <div class="modal-header">
+                <h2>Mentorat Artistique - Ressources</h2>
+                <p>Formations vidéos et livres gratuits pour développer vos talents artistiques</p>
+            </div>
+            <div class="modal-body">
+                <div class="video-grid">
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Formation artistique" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Techniques de dessin" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                </div>
+                <h3 style="margin-top: 2rem; margin-bottom: 1rem;">Livres gratuits recommandés</h3>
+                <ul style="margin-left: 1.5rem;">
+                    <li>L'Art Africain Contemporain - Téléchargement gratuit</li>
+                    <li>Techniques de Peinture Traditionnelle - PDF disponible</li>
+                    <li>Histoire de l'Art en Afrique - Livre électronique</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal pour Concours Thématiques -->
+    <div class="modal" id="concours-modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('concours-modal')">&times;</span>
+            <div class="modal-header">
+                <h2>Concours Thématiques en Ligne</h2>
+                <p>Participez à nos concours et montrez vos talents</p>
+            </div>
+            <div class="modal-body">
+                <div class="contest-card">
+                    <h4>Concours de Peinture "Jeunes Talents"</h4>
+                    <p>Date limite: 30 Novembre 2023</p>
+                    <p>Thème: "La beauté du Lac Moero"</p>
+                    <a href="#" class="btn-primary">Participer maintenant</a>
+                </div>
+                <div class="contest-card">
+                    <h4>Concours de Photographie "Notre Patrimoine"</h4>
+                    <p>Date limite: 15 Décembre 2023</p>
+                    <p>Thème: "Traditions et Modernité"</p>
+                    <a href="#" class="btn-primary">Participer maintenant</a>
+                </div>
+                <div class="contest-card">
+                    <h4>Concours d'Écriture "Récits du Lac"</h4>
+                    <p>Date limite: 10 Janvier 2024</p>
+                    <p>Thème: "Histoires de notre communauté"</p>
+                    <a href="#" class="btn-primary">Participer maintenant</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal pour Partenariats Éducatifs -->
+    <div class="modal" id="partenariats-modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('partenariats-modal')">&times;</span>
+            <div class="modal-header">
+                <h2>Nos Partenaires Éducatifs</h2>
+                <p>Collaborations avec des associations culturelles locales</p>
+            </div>
+            <div class="modal-body">
+                <div class="partner-grid">
+                    <div class="partner-card">
+                        <img src="logo_simpya.jpg" alt="Simpya" class="partner-logo" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAiIGhlaWdodD0iODAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0iI2U5ZWNlZiIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTQiIGZpbGw9IiM2Yzc1N2QiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGR5PSIuM2VtIj5TaW1weWE8L3RleHQ+PC9zdmc+'">
+                        <h4>Simpya</h4>
+                        <p>Association pour le développement communautaire</p>
+                    </div>
+                    <div class="partner-card">
+                        <img src="logo_mjrk.jpg" alt="MJRK" class="partner-logo" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAiIGhlaWdodD0iODAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0iI2U5ZWNlZiIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTQiIGZpbGw9IiM2Yzc1N2QiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGR5PSIuM2VtIj5NSlJLPC90ZXh0Pjwvc3ZnPg=='">
+                        <h4>MJRK</h4>
+                        <p>Mouvement de la Jeunesse Révolutionnaire de Kasumbalesa</p>
+                    </div>
+                    <div class="partner-card">
+                        <img src="logo_ashilac_1.png" alt="ASHILAC" class="partner-logo" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAiIGhlaWdodD0iODAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0iI2U5ZWNlZiIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTQiIGZpbGw9IiM2Yzc1N2QiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGR5PSIuM2VtIj5Bc2hpbGFjPC90ZXh0Pjwvc3ZnPg=='">
+                        <h4>ASHILAC</h4>
+                        <p>Association Socio-Culturelle de Bashila du Lac Moero</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal pour Devenir Bénévole -->
+    <div class="modal" id="benevole-modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('benevole-modal')">&times;</span>
+            <div class="modal-header">
+                <h2>Devenir Bénévole ASHILAC</h2>
+                <p>Rejoignez notre équipe et contribuez à l'évolution de notre association</p>
+            </div>
+            <div class="modal-body">
+                <form id="benevole-form">
+                    <div class="form-group">
+                        <label class="form-label">Nom complet *</label>
+                        <input type="text" class="form-control" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Email *</label>
+                        <input type="email" class="form-control" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Téléphone</label>
+                        <input type="tel" class="form-control" name="phone">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Niveau d'études *</label>
+                        <select class="form-control" name="education" required>
+                            <option value="">Sélectionnez votre niveau</option>
+                            <option value="primaire">Primaire</option>
+                            <option value="secondaire">Secondaire</option>
+                            <option value="universitaire">Universitaire</option>
+                            <option value="autre">Autre</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Domaine de compétence *</label>
+                        <select class="form-control" name="competence" required>
+                            <option value="">Sélectionnez votre domaine</option>
+                            <option value="art">Arts (peinture, sculpture, etc.)</option>
+                            <option value="musique">Musique</option>
+                            <option value="danse">Danse</option>
+                            <option value="theatre">Théâtre</option>
+                            <option value="organisation">Organisation d'événements</option>
+                            <option value="communication">Communication</option>
+                            <option value="autre">Autre</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Comment souhaitez-vous contribuer ? *</label>
+                        <textarea class="form-control" name="contribution" placeholder="Décrivez comment vous pouvez participer à l'évolution d'ASHILAC..." required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Disponibilité (heures par semaine)</label>
+                        <input type="number" class="form-control" name="disponibility" min="1" max="40">
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn-primary" style="width: 100%;">Postuler comme bénévole</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal pour Proposer une Idée -->
+    <div class="modal" id="idee-modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('idee-modal')">&times;</span>
+            <div class="modal-header">
+                <h2>Proposer un Projet à ASHILAC</h2>
+                <p>Soumettez vos idées pour de nouveaux projets culturels</p>
+            </div>
+            <div class="modal-body">
+                <form id="idee-form">
+                    <div class="form-group">
+                        <label class="form-label">Nom du projet *</label>
+                        <input type="text" class="form-control" name="project_name" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Votre nom *</label>
+                        <input type="text" class="form-control" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Email *</label>
+                        <input type="email" class="form-control" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Téléphone</label>
+                        <input type="tel" class="form-control" name="phone">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Description du projet *</label>
+                        <textarea class="form-control" name="description" placeholder="Décrivez en détail votre projet..." required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Objectifs du projet *</label>
+                        <textarea class="form-control" name="objectives" placeholder="Quels sont les objectifs de votre projet ?" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Bénéfices pour la communauté *</label>
+                        <textarea class="form-control" name="benefits" placeholder="En quoi ce projet bénéficiera-t-il à la communauté ?" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Ressources nécessaires</label>
+                        <textarea class="form-control" name="resources" placeholder="Quelles ressources seraient nécessaires pour réaliser ce projet ?"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Durée estimée du projet</label>
+                        <input type="text" class="form-control" name="duration" placeholder="Ex: 3 mois, 1 an...">
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn-primary" style="width: 100%;">Soumettre le projet</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal pour les images de la galerie -->
     <div class="modal" id="image-modal">
         <div class="modal-content">
-            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <span class="close-modal" onclick="closeModal('image-modal')">&times;</span>
             <img class="modal-image" id="modal-image" src="" alt="">
             <div class="modal-info">
                 <h3 id="modal-title"></h3>
@@ -1879,6 +2169,28 @@
                     artist: "Annette Tshibanda",
                     category: "artisanat",
                     image: "image11.jpg"
+                }
+            ],
+            videos: [
+                {
+                    id: 1,
+                    title: "La richesse culturelle africaine",
+                    youtubeId: "dQw4w9WgXcQ"
+                },
+                {
+                    id: 2,
+                    title: "Traditions et modernité en Afrique",
+                    youtubeId: "dQw4w9WgXcQ"
+                },
+                {
+                    id: 3,
+                    title: "Arts visuels africains contemporains",
+                    youtubeId: "dQw4w9WgXcQ"
+                },
+                {
+                    id: 4,
+                    title: "Musique et danse traditionnelles",
+                    youtubeId: "dQw4w9WgXcQ"
                 }
             ]
         };
@@ -2075,7 +2387,10 @@
                             <span><i class="fas fa-${meta.icon}"></i> ${meta.text}</span>
                         `).join('')}
                     </div>
-                    <a href="#" class="btn-outline">En savoir plus</a>
+                    ${item.title === "Production Vidéo" ? 
+                        `<a href="javascript:void(0)" class="btn-outline" onclick="openModal('video-modal')">En savoir plus</a>` :
+                        `<a href="#" class="btn-outline">En savoir plus</a>`
+                    }
                 </div>
             `).join('');
         }
@@ -2089,7 +2404,14 @@
                     </div>
                     <h3>${item.title}</h3>
                     <p>${item.description}</p>
-                    <a href="#" class="btn-outline">En savoir plus <i class="fas fa-arrow-right"></i></a>
+                    ${item.title === "Mentorat Artistique" ? 
+                        `<a href="javascript:void(0)" class="btn-outline" onclick="openModal('mentorat-modal')">En savoir plus</a>` :
+                        item.title === "Concours Thématiques" ?
+                        `<a href="javascript:void(0)" class="btn-outline" onclick="openModal('concours-modal')">En savoir plus</a>` :
+                        item.title === "Partenariats Éducatifs" ?
+                        `<a href="javascript:void(0)" class="btn-outline" onclick="openModal('partenariats-modal')">En savoir plus</a>` :
+                        `<a href="#" class="btn-outline">En savoir plus <i class="fas fa-arrow-right"></i></a>`
+                    }
                 </div>
             `).join('');
 
@@ -2132,11 +2454,14 @@
                             `).join('')}
                         </div>
                     ` : ''}
-                    ${item.link ? `
-                        <a href="${item.link}" class="btn-primary" target="_blank">Participer</a>
-                    ` : `
-                        <a href="#" class="btn-primary">Participer</a>
-                    `}
+                    ${item.title === "Devenir Bénévole" ? 
+                        `<a href="javascript:void(0)" class="btn-primary" onclick="openModal('benevole-modal')">Participer</a>` :
+                        item.title === "Proposer une Idée" ?
+                        `<a href="javascript:void(0)" class="btn-primary" onclick="openModal('idee-modal')">Participer</a>` :
+                        item.link ?
+                        `<a href="${item.link}" class="btn-primary" target="_blank">Participer</a>` :
+                        `<a href="#" class="btn-primary">Participer</a>`
+                    }
                 </div>
             `).join('');
         }
@@ -2152,7 +2477,7 @@
                             <p>Artiste: ${item.artist}</p>
                             <div class="gallery-actions" style="display: flex; gap: 0.5rem;">
                                 <button class="btn-icon" style="display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 50%; background-color: rgba(0, 0, 0, 0.05); border: none; color: white; cursor: pointer; transition: var(--transition);"><i class="far fa-heart"></i></button>
-                                <button class="btn-icon" onclick="openModal('${item.title}', '${item.artist}', '${item.image}')" style="display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 50%; background-color: rgba(0, 0, 0, 0.05); border: none; color: white; cursor: pointer; transition: var(--transition);"><i class="fas fa-expand"></i></button>
+                                <button class="btn-icon" onclick="openImageModal('${item.title}', '${item.artist}', '${item.image}')" style="display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 50%; background-color: rgba(0, 0, 0, 0.05); border: none; color: white; cursor: pointer; transition: var(--transition);"><i class="fas fa-expand"></i></button>
                             </div>
                         </div>
                     </div>
@@ -2256,6 +2581,28 @@
                 // Afficher toast
                 showToast('Inscription à la newsletter réussie!');
             });
+            
+            // Formulaire bénévolat
+            const benevoleForm = document.getElementById('benevole-form');
+            benevoleForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Simulation d'envoi
+                showToast('Votre candidature de bénévolat a été envoyée avec succès!');
+                closeModal('benevole-modal');
+                this.reset();
+            });
+            
+            // Formulaire idée de projet
+            const ideeForm = document.getElementById('idee-form');
+            ideeForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Simulation d'envoi
+                showToast('Votre projet a été soumis avec succès!');
+                closeModal('idee-modal');
+                this.reset();
+            });
         }
 
         // === GEOLOCALISATION ===
@@ -2332,17 +2679,21 @@
             return R * c;
         }
 
-        // === FONCTIONNALITÉS ===
-        function addToCalendar(eventTitle) {
-            showToast(`"${eventTitle}" a été ajouté à votre calendrier!`);
+        // === GESTION DES MODALS ===
+        function openModal(modalId) {
+            document.getElementById(modalId).classList.add('active');
+            
+            // Charger les vidéos si c'est le modal vidéo
+            if (modalId === 'video-modal') {
+                loadVideos();
+            }
         }
 
-        function showEventDetails(eventTitle) {
-            showToast(`Détails de l'événement "${eventTitle}" affichés!`);
-            // Dans une implémentation réelle, cela ouvrirait un modal avec les détails complets
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
         }
 
-        function openModal(title, artist, image) {
+        function openImageModal(title, artist, image) {
             const modal = document.getElementById('image-modal');
             const modalImage = document.getElementById('modal-image');
             const modalTitle = document.getElementById('modal-title');
@@ -2355,8 +2706,23 @@
             modal.classList.add('active');
         }
 
-        function closeModal() {
-            document.getElementById('image-modal').classList.remove('active');
+        function loadVideos() {
+            const container = document.getElementById('video-container');
+            container.innerHTML = appData.videos.map(video => `
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/${video.youtubeId}" title="${video.title}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+            `).join('');
+        }
+
+        // === FONCTIONNALITÉS EXISTANTES ===
+        function addToCalendar(eventTitle) {
+            showToast(`"${eventTitle}" a été ajouté à votre calendrier!`);
+        }
+
+        function showEventDetails(eventTitle) {
+            showToast(`Détails de l'événement "${eventTitle}" affichés!`);
+            // Dans une implémentation réelle, cela ouvrirait un modal avec les détails complets
         }
 
         function showToast(message) {
@@ -2369,10 +2735,10 @@
             }, 3000);
         }
 
-        // Fermer le modal en cliquant à l'extérieur
-        document.getElementById('image-modal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeModal();
+        // Fermer les modals en cliquant à l'extérieur
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('modal')) {
+                e.target.classList.remove('active');
             }
         });
     </script>
